@@ -1,0 +1,1 @@
+System.register([],(function(t,e){"use strict";return{execute:function(){var e="viewport",i={[e]:{value:void 0,isRotated:!1}};t("initialGlobals",FEATURES?.viewportStoryGlobals?i:{viewport:"reset",viewportRotated:!1})}}}));
