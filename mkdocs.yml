@@ -1,0 +1,43 @@
+# Project information
+site_name: Frontend React Vite
+site_description: 'A Template for building a frontend application with React and Vite'
+site_url: 'https://vymalo.github.io/template-frontend-react-vite'
+
+# Theme settings
+theme:
+  name: material
+  locale: en
+  highlightjs: true
+  palette:
+    scheme: slate
+    primary: purple
+
+# Navbar settings (site structure)
+nav:
+  - Home: README.md
+  - Storybook: storybook
+
+# Extra settings
+markdown_extensions:
+  - admonition
+  - codehilite
+  - attr_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+
+repo_name: template-frontend-react-vite
+repo_url: https://github.com/vymalo/template-frontend-react-vite
+edit_uri: edit/main/docs/

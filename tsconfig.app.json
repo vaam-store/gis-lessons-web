@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "@tsconfig/vite-react/tsconfig.json"
+  ],
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@mod/*": [
+        "src/libs/modules/*"
+      ],
+      "@openapi/*": [
+        "src/openapi/*"
+      ],
+      "@comp/*": [
+        "src/libs/components/*"
+      ],
+      "@scr/*": [
+        "src/screens/*"
+      ]
+    },
+    "baseUrl": "./"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "coverage",
+    "storybook-static",
+    "public",
+    "**/*.test.{ts,tsx}"
+  ]
+}

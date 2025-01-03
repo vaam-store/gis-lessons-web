@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: Lesson OpenApi
+  description: |
+    Lesson management app using CBOR as PoC. More at [https://lesson.vymalo.com](https://lesson.vymalo.com)
+  termsOfService: https://lesson.vymalo.com/res/tos
+  contact:
+    email: lesson@vymalo.com
+    name: Vymalo Lesson Team
+  license:
+    name: MIT
+  version: 0.1.0
+externalDocs:
+  description: |
+    Find out more about Managing your Lesson from afar. Let's meet on 
+    our website 😉.
+  url: https://blog.ssegning.com
+servers: []
+tags:
+  - name: lesson
+    description: All about managing lesson
+paths:
+  /api/lessons/{slug_name}/slides.md:
+    get:
+      tags:
+        - lesson
+      summary: Get lesson slides
+      description: |
+        This is to get a single Markdown
+      operationId: getLessonSlide
+      parameters:
+        - name: slug_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            text/markdown:
+              schema:
+                type: string
+        400:
+          description: 'wrong content provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: 'Internal server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/lessons/map.json:
+    get:
+      tags:
+        - lesson
+      summary: Get lessons map
+      operationId: getLessonMap
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+        400:
+          description: 'wrong content provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: 'Internal server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/lessons/{slug_name}/course.md:
+    get:
+      tags:
+        - lesson
+      summary: Get lesson course
+      description: |
+        This is to get a single Markdown
+      operationId: getLessonCourse
+      parameters:
+        - name: slug_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            text/markdown:
+              schema:
+                type: string
+        400:
+          description: 'wrong content provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: 'Internal server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: number
+      required:
+        - message
+        - code
+  securitySchemes: {}

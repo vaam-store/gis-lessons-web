@@ -1,0 +1,63 @@
+name: Publish docs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      # Enable Corepack
+      - name: Enable Corepack
+        run: corepack enable
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # Install dependencies (MkDocs and Material theme)
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # Specify the Node.js version you need
+
+      - name: Install dependencies
+        run: |
+          yarn
+
+      - name: Build Storybook
+        run: |
+          yarn storybook:build
+
+      # Move Storybook to MkDocs site directory
+      - name: Move Storybook to MkDocs site
+        run: |
+          mkdir -p site/
+
+          mv storybook-static site/storybook
+
+      # Build and deploy the site to GitHub Pages
+      - name: Deploy to GitHub Pages
+        run: |
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/ADORSYS-GIS/gis-lessons-web.git
+
+          mkdocs gh-deploy --force -m "chore: deploy documentation #{sha}" --dirty

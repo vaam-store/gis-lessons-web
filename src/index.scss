@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+article {
+  h1:first-child {
+    @apply md:font-extrabold xl:text-8xl;
+
+    span {
+      @apply bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent;
+    }
+  }
+}
