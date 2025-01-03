@@ -30,7 +30,7 @@ export default tseslint.config(
       // storybook.configs.recommended,
       // reactHooks.configs.recommended,
     ],
-    ignores: ['src/openapi'],
+    ignores: ['src/openapi', 'node_modules', 'dist', 'public'],
     files: ['src/**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,

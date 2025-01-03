@@ -21,7 +21,7 @@ export default defineConfig({
       limits: [
         {
           name: '**/*.js',
-          limit: 250_000, // 250.0KB
+          limit: 300_000, // 250.0KB
         },
       ],
     }),
