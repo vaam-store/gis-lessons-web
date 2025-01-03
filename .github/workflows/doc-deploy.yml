@@ -58,6 +58,6 @@ jobs:
       # Build and deploy the site to GitHub Pages
       - name: Deploy to GitHub Pages
         run: |
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/ADORSYS-GIS/gis-lessons-web.git
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/stephane-segning/gis-lessons-web.git
 
           mkdocs gh-deploy --force -m "chore: deploy documentation #{sha}" --dirty

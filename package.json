@@ -18,7 +18,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --ui -w",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "vercel-build": "yarn codegen && yarn generate-pwa-assets && yarn build"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.1.1",
