@@ -26,10 +26,11 @@ const defaultPreset: Preset = {
 
 export default defineConfig({
   // injectThemeColor: true,
-  images: ['public/vite.svg'],
+  images: ['public/icon.svg'],
   /* remember to include the preset for favicons and apple touch icon */
   headLinkOptions: {
     preset: '2023',
+    basePath: '/images/',
   },
   preset: combinePresetAndAppleSplashScreens(defaultPreset, {
     padding: 0.3,

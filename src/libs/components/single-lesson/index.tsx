@@ -1,1 +1,1 @@
-export * from './single-lesson-content';
+export { default as SingleLessonContent } from './single-lesson-content';

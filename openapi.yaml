@@ -15,32 +15,73 @@ externalDocs:
     Find out more about Managing your Lesson from afar. Let's meet on 
     our website 😉.
   url: https://blog.ssegning.com
-servers: []
+servers: [ ]
 tags:
   - name: lesson
     description: All about managing lesson
 paths:
-  /api/lessons/{slug_name}/slides.md:
+  /api/lessons:
     get:
       tags:
         - lesson
-      summary: Get lesson slides
-      description: |
-        This is to get a single Markdown
-      operationId: getLessonSlide
+      summary: Get lessons
+      operationId: getLessons
       parameters:
-        - name: slug_name
+        - name: limit
+          in: query
+          description: Number of items to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: The number of items to skip before starting to collect the result set
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lesson'
+        400:
+          description: 'wrong content provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: 'Internal server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/lessons/{slug_name_or_id}:
+    get:
+      tags:
+        - lesson
+      summary: Get lesson
+      operationId: getLesson
+      parameters:
+        - name: slug_name_or_id
           in: path
           required: true
           schema:
             type: string
+            format: cuid
       responses:
         200:
           description: 'successful operation'
           content:
-            text/markdown:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Lesson'
         400:
           description: 'wrong content provided'
           content:
@@ -53,25 +94,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
-  /api/lessons/map.json:
+  /api/lessons/{slug_name_or_id}/slides/{slide_id}:
     get:
       tags:
         - lesson
-      summary: Get lessons map
-      operationId: getLessonMap
+      summary: Get lesson slide
+      operationId: getLessonSlide
+      parameters:
+        - name: slug_name_or_id
+          in: path
+          required: true
+          description: The slug name or id of the lesson
+          schema:
+            type: string
+            format: cuid
+        - name: slide_id
+          in: path
+          required: true
+          description: The id of the slide
+          schema:
+            type: string
+            format: cuid
       responses:
         200:
           description: 'successful operation'
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
-                  properties:
-                    title:
-                      type: string
+                $ref: '#/components/schemas/LessonSlide'
         400:
           description: 'wrong content provided'
           content:
@@ -84,27 +134,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /api/lessons/{slug_name}/course.md:
+  /api/lessons/{slug_name_or_id}/course/{course_id}:
     get:
       tags:
         - lesson
       summary: Get lesson course
-      description: |
-        This is to get a single Markdown
       operationId: getLessonCourse
       parameters:
-        - name: slug_name
+        - name: slug_name_or_id
           in: path
           required: true
+          description: The slug name or id of the lesson
           schema:
             type: string
+            format: cuid
+        - name: course_id
+          in: path
+          required: true
+          description: The id of the course
+          schema:
+            type: string
+            format: cuid
       responses:
         200:
           description: 'successful operation'
           content:
-            text/markdown:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/LessonCourse'
         400:
           description: 'wrong content provided'
           content:
@@ -119,6 +176,84 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          format: cuid
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - created_at
+        - updated_at
+    CoreLesson:
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        slug_name:
+          type: string
+      required:
+        - title
+        - description
+        - slug_name
+    UpdateLesson:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreLesson'
+        - type: object
+          properties:
+            course:
+              $ref: '#/components/schemas/CoreLessonCourse'
+            slides:
+              $ref: '#/components/schemas/CoreLessonSlide'
+          required:
+            - course
+            - slides
+    Lesson:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreLesson'
+        - type: object
+          properties:
+            course_id:
+              type: string
+              format: cuid
+            slide_id:
+              type: string
+              format: cuid
+          required:
+            - course_id
+            - slide_id
+    CoreLessonSlide:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+    LessonSlide:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreLessonSlide'
+    CoreLessonCourse:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+    LessonCourse:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreLessonCourse'
     Error:
       type: object
       properties:
@@ -129,4 +264,8 @@ components:
       required:
         - message
         - code
-  securitySchemes: {}
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

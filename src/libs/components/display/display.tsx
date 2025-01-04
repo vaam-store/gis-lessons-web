@@ -32,12 +32,14 @@ export default function Display({ data }: DisplayProps) {
       controls: true,
       embedded: true,
     });
-    //console.log(deckRef.current);
 
-    deckRef.current.initialize().then(() => {
-      console.log('Deck initialized');
-      // good place for event handlers and plugin setups
-    });
+    deckRef.current
+      .initialize()
+      .then(() => {
+        console.log('Deck initialized');
+        // good place for event handlers and plugin setups
+      })
+      .catch(console.warn);
 
     return () => {
       try {

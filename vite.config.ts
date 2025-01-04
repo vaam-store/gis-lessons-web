@@ -29,6 +29,7 @@ export default defineConfig({
     ViteMinifyPlugin({}),
     legacy({
       targets: ['defaults'],
+      modernPolyfills: true,
     }),
     robots(),
     webUpdateNotice({
@@ -40,12 +41,40 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       manifest: {
-        name: 'Frontend App Test',
-        short_name: 'Frontend',
+        name: 'GIS Lessons',
+        short_name: 'GISchool',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
+        icons: [
+          {
+            src: 'images/pwa-32x32.png',
+            sizes: '32x32',
+            type: 'image/png',
+          },
+          {
+            src: 'images/pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
+          },
+          {
+            src: 'images/pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'images/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'images/maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 5_000_000,
@@ -54,6 +83,10 @@ export default defineConfig({
   ],
   server: {
     proxy: {
+      '/rest': {
+        target: 'http://localhost:4010',
+        rewrite: (path) => path.replace('/rest', '/'),
+      },
       '/misc/tp': {
         target: 'http://localhost:4318',
         rewrite: (path) => path.replace('/misc/tp', '/v1/traces'),

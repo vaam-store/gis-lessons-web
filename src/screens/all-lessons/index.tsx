@@ -1,9 +1,9 @@
 import { SchoolList } from '@comp/school-list';
-import { useGetLessonMap } from '@openapi/queries';
+import { useGetLessons } from '@openapi/queries';
 import { Helmet } from 'react-helmet';
 
 export default function AllSchools() {
-  const { data, error, isPending } = useGetLessonMap();
+  const { data, error, isPending } = useGetLessons();
   if (isPending) {
     return <div>Loading...</div>;
   }
@@ -18,7 +18,7 @@ export default function AllSchools() {
         <title>All school!</title>
       </Helmet>
 
-      <h1 className='mb-4 text-4xl font-extrabold md:mb-8'>All Schools</h1>
+      <h1 className='app-title'>All Schools</h1>
 
       <SchoolList data={data!} />
     </div>

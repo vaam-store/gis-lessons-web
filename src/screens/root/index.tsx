@@ -1,5 +1,5 @@
 import { GlobalSpinner } from '@comp/global-spinner.tsx';
-import AppNavBar from '@comp/root/navbar.tsx';
+import AppNavBar from '@comp/navbar/navbar.tsx';
 import { Outlet, useNavigation } from 'react-router-dom';
 
 export default function RootScreen() {

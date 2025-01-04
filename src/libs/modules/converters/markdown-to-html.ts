@@ -9,7 +9,7 @@ import { visit } from 'unist-util-visit';
 
 const rehypeHeadingToSpan = () => {
   return (tree: any) => {
-    visit(tree, 'element', (node) => {
+    visit(tree, 'element', (node: Record<string, any>) => {
       if (node.tagName === 'h1') {
         node.children = [
           {

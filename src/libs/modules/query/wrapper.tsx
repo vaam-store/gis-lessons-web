@@ -10,10 +10,13 @@ export default function QueryWrapper({ children }: PropsWithChildren) {
   return (
     <PersistQueryClientProvider
       client={queryClient}
-      persistOptions={{ persister: asyncStoragePersister }}
+      persistOptions={{
+        persister: asyncStoragePersister,
+        maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+      }}
       onSuccess={() => console.log('QueryClient rehydrated')}>
       {children}
-      <ReactQueryDevtools buttonPosition='bottom-right' />
+      <ReactQueryDevtools buttonPosition='bottom-left' />
     </PersistQueryClientProvider>
   );
 }
