@@ -1,4 +1,4 @@
-import { prefetchUseGetLessonCourse } from '@openapi/queries/prefetch.ts';
+import { prefetchUseGetLesson } from '@openapi/queries/prefetch.ts';
 import { QueryClient } from '@tanstack/react-query';
 import { LoaderFunctionArgs } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ export function lessonLoader(
       return null;
     }
 
-    await prefetchUseGetLessonCourse(qc, {
+    await prefetchUseGetLesson(qc, {
       path: {
         slug_name_or_id: args.params.slug_name,
       },

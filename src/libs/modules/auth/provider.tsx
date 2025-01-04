@@ -10,8 +10,8 @@ const onSigninCallback = (): void => {
 };
 
 const onRemoveUser = (): void => {
-  window. location. pathname = "";
-}
+  window.location.pathname = '';
+};
 
 const oidcConfig: AuthProviderProps = {
   userStore: new WebStorageStateStore({ store: window.localStorage }),
