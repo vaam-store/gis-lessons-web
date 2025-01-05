@@ -47,13 +47,14 @@ jobs:
       - name: Build Storybook
         run: |
           yarn storybook:build
-
-      # Move Storybook to MkDocs site directory
-      - name: Move Storybook to MkDocs site
-        run: |
           mkdir -p site/
-
           mv storybook-static site/storybook
+
+      - name: Build Coverage
+        run: |
+          yarn test:coverage
+          mkdir -p coverage/
+          mv coverage site/coverage
 
       # Build and deploy the site to GitHub Pages
       - name: Deploy to GitHub Pages
