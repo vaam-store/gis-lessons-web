@@ -9993,20 +9993,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"highlightjs-lang.js@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "highlightjs-lang.js@npm:1.1.1"
-  checksum: 10c0/0eb04908609f64a83befe1017451792bb81f64972a79a3cc6844e70a3598e5774c793c38b8d692664b5fccd3357cd2c80698d227e79e3f1d14c3ec6b1c62e091
-  languageName: node
-  linkType: hard
-
-"highlightjs-line-numbers.js@npm:^2.9.0":
-  version: 2.9.0
-  resolution: "highlightjs-line-numbers.js@npm:2.9.0"
-  checksum: 10c0/3521b6fa694c2304e100b020ed90899a576493a5362ac3d894861b7f6e3ef94561adc77b2b3fdd48785db5ebc2b82cf462a247d4a57023852b5c739eb61651e0
-  languageName: node
-  linkType: hard
-
 "hmac-drbg@npm:^1.0.1":
   version: 1.0.1
   resolution: "hmac-drbg@npm:1.0.1"
@@ -15105,8 +15091,6 @@ __metadata:
     eslint-plugin-storybook: "npm:^0.11.0"
     globals: "npm:^15.13.0"
     highlight.js: "npm:^11.11.1"
-    highlightjs-lang.js: "npm:^1.1.1"
-    highlightjs-line-numbers.js: "npm:^2.9.0"
     husky: "npm:^9.1.7"
     i18next: "npm:^24.2.0"
     i18next-browser-languagedetector: "npm:^8.0.2"
