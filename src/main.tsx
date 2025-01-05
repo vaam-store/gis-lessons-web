@@ -1,6 +1,7 @@
 import '@mod/tracing';
 import './index.scss';
 
+import DefaultHead from '@comp/helmet';
 import { AuthProvider, SilentLogin } from '@mod/auth';
 import { i18nFn } from '@mod/i18n';
 import Notification from '@mod/notification';
@@ -9,7 +10,6 @@ import RouterProvider from '@mod/router';
 import Versioning from '@mod/versioning';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Helmet } from 'react-helmet';
 import { I18nextProvider } from 'react-i18next';
 
 async function main() {
@@ -25,10 +25,7 @@ async function main() {
           <QueryWrapper>
             <SilentLogin />
             <Versioning />
-            <Helmet
-              titleTemplate='%s | GIS Lessons'
-              defaultTitle='GIS Lessons'
-            />
+            <DefaultHead />
             <RouterProvider />
             <Notification />
           </QueryWrapper>

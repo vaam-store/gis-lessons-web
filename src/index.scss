@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+@use 'reveal.js/dist/reveal.css';
+@use 'reveal.js/dist/theme/night.css';
+@use 'highlight.js/scss/sunburst';
 
 article {
   h1:first-child {

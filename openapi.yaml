@@ -15,7 +15,7 @@ externalDocs:
     Find out more about Managing your Lesson from afar. Let's meet on 
     our website 😉.
   url: https://blog.ssegning.com
-servers: [ ]
+servers: []
 tags:
   - name: lesson
     description: All about managing lesson
@@ -73,8 +73,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            format: cuid
+            $ref: '#/components/schemas/Cuid'
       responses:
         200:
           description: 'successful operation'
@@ -106,15 +105,13 @@ paths:
           required: true
           description: The slug name or id of the lesson
           schema:
-            type: string
-            format: cuid
+            $ref: '#/components/schemas/Cuid'
         - name: slide_id
           in: path
           required: true
           description: The id of the slide
           schema:
-            type: string
-            format: cuid
+            $ref: '#/components/schemas/Cuid'
       responses:
         200:
           description: 'successful operation'
@@ -146,15 +143,13 @@ paths:
           required: true
           description: The slug name or id of the lesson
           schema:
-            type: string
-            format: cuid
+            $ref: '#/components/schemas/Cuid'
         - name: course_id
           in: path
           required: true
           description: The id of the course
           schema:
-            type: string
-            format: cuid
+            $ref: '#/components/schemas/Cuid'
       responses:
         200:
           description: 'successful operation'
@@ -180,8 +175,7 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: cuid
+          $ref: '#/components/schemas/Cuid'
         created_at:
           type: string
           format: date-time
@@ -196,10 +190,15 @@ components:
       properties:
         title:
           type: string
+          example: Introduction to TypeScript
         description:
           type: string
+          example: |
+            This is a course that will introduce you to TypeScript.
+            You will learn the basics of TypeScript and how to use it in your projects.
         slug_name:
           type: string
+          example: introduction-to-typescript
       required:
         - title
         - description
@@ -224,11 +223,9 @@ components:
         - type: object
           properties:
             course_id:
-              type: string
-              format: cuid
+              $ref: '#/components/schemas/Cuid'
             slide_id:
-              type: string
-              format: cuid
+              $ref: '#/components/schemas/Cuid'
           required:
             - course_id
             - slide_id
@@ -237,6 +234,32 @@ components:
       properties:
         content:
           type: string
+          example: |
+            ## Slide 1
+            A paragraph with some text and a [link to adorsys](https://adorsys.com).
+            ------
+            ## Slide 1-1
+            Some more text and another [link to Vymalo](https://vymalo.com).
+            ------
+            ## Slide 1-2
+            Second slide with some text and a [link to SSegning](https://ssegning.com).
+            ---
+            ## Slide 2
+            ```typescript [1-2|3|4]
+            let a = 1;
+            let b = 2;
+            let c = x => 1 + 2 + x;
+            c(3);
+            ```
+            ---
+            ## Slide 3
+            ```mermaid
+            graph LR;
+              A[Hard edge]-->|Link text|B(Round edge);
+              B-->C{Decision};
+              C-->|One|D[Result one];
+              C-->|Two|E[Result two];
+            ```
       required:
         - content
     LessonSlide:
@@ -248,6 +271,30 @@ components:
       properties:
         content:
           type: string
+          example: |
+            # This is a course
+
+            ## Lesson 1
+            Some meaningful content
+
+            ## Lesson 2
+            Some more meaningful content
+            ```typescript
+            let a = 1;
+            let b = 2;
+            let c = x => 1 + 2 + x;
+            c(3);
+            ```
+
+            ## Lesson 3
+            ```mermaid
+            flowchart LR
+              A[Start] --> B{Is it?};
+              B -- Yes --> C[OK];
+              C --> D[Rethink];
+              D --> B;
+              B -- No ----> E[End];
+            ```
       required:
         - content
     LessonCourse:
@@ -264,6 +311,9 @@ components:
       required:
         - message
         - code
+    Cuid:
+      type: string
+      format: cuid
   securitySchemes:
     bearerAuth:
       type: http

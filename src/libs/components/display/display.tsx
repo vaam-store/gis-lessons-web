@@ -1,14 +1,15 @@
 import { useEffect, useRef } from 'react';
 import Reveal from 'reveal.js';
 import RevealMermaid from 'reveal.js-mermaid-plugin';
-import Highlight from 'reveal.js/plugin/highlight/highlight';
+import RevealHighlight from 'reveal.js/plugin/highlight/highlight';
 import RevealMarkdown from 'reveal.js/plugin/markdown/markdown';
 import Notes from 'reveal.js/plugin/notes/notes';
 import RevealSearch from 'reveal.js/plugin/search/search';
+
 import './display.scss';
 
 const htmlContent = (data: string) => `
-<section data-markdown>
+<section data-markdown data-separator="\n---\n" data-separator-vertical="\n------\n">
   <textarea data-template>
     ${data}
   </textarea>
@@ -28,7 +29,13 @@ export default function Display({ data }: DisplayProps) {
     if (deckRef.current) return;
 
     deckRef.current = new Reveal(deckDivRef.current!, {
-      plugins: [Notes, Highlight, RevealSearch, RevealMermaid, RevealMarkdown],
+      plugins: [
+        RevealMarkdown,
+        RevealHighlight,
+        Notes,
+        RevealSearch,
+        RevealMermaid,
+      ],
       controls: true,
       embedded: true,
     });

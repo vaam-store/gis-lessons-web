@@ -1,3 +1,4 @@
+import { Container } from '@comp/container';
 import { SchoolList } from '@comp/school-list';
 import { useGetLessons } from '@openapi/queries';
 import { Helmet } from 'react-helmet';
@@ -13,7 +14,7 @@ export default function AllSchools() {
   }
 
   return (
-    <div className='container mx-auto px-4'>
+    <Container>
       <Helmet>
         <title>All school!</title>
       </Helmet>
@@ -21,6 +22,6 @@ export default function AllSchools() {
       <h1 className='app-title'>All Schools</h1>
 
       <SchoolList data={data!} />
-    </div>
+    </Container>
   );
 }

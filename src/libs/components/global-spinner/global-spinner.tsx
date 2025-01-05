@@ -1,4 +1,4 @@
-export function GlobalSpinner() {
+export default function GlobalSpinner() {
   return (
     <div className='global-spinner'>
       Loading...
