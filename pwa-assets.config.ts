@@ -41,6 +41,7 @@ export default defineConfig({
     // by default, dark splash screens are exluded
     darkResizeOptions: {
       background: 'black',
+      fit: 'contain',
     },
     linkMediaOptions: {
       // will log the links you need to add to your html pages

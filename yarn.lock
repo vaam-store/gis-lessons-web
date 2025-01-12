@@ -14845,7 +14845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:*, sharp@npm:^0.33.3":
+"sharp@npm:*, sharp@npm:^0.33.3, sharp@npm:^0.33.5":
   version: 0.33.5
   resolution: "sharp@npm:0.33.5"
   dependencies:
@@ -15128,6 +15128,8 @@ __metadata:
     reveal.js: "npm:^5.1.0"
     reveal.js-mermaid-plugin: "npm:^2.3.0"
     sass: "npm:^1.83.0"
+    sharp: "npm:^0.33.5"
+    sharp-ico: "npm:^0.1.5"
     storybook: "npm:^8.4.2"
     tailwind-merge: "npm:^2.6.0"
     tailwindcss: "npm:^3.4.17"

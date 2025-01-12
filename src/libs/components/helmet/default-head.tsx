@@ -8,6 +8,9 @@ export default function DefaultHead() {
       titleTemplate='%s | GIS Lessons'
       defaultTitle='GIS Lessons'
       htmlAttributes={{ lang: i18n.language }}
+      base={{
+        href: import.meta.env.BASE_URL,
+      }}
     />
   );
 }

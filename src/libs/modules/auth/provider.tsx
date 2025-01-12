@@ -1,7 +1,7 @@
 import { getProjectEnvVariables } from '@mod/env';
 import { WebStorageStateStore } from 'oidc-client-ts';
-import { PropsWithChildren } from 'react';
-import { AuthProvider, AuthProviderProps } from 'react-oidc-context';
+import type { PropsWithChildren } from 'react';
+import { AuthProvider, type AuthProviderProps } from 'react-oidc-context';
 
 const { envVariables } = getProjectEnvVariables();
 
@@ -22,6 +22,7 @@ const oidcConfig: AuthProviderProps = {
   silent_redirect_uri: window.location.origin + '/silent-sso.html',
   response_type: 'code',
   scope: envVariables.VITE_OIDC_SCOPES,
+  loadUserInfo: true,
   extraQueryParams: {
     ui_locales: window.navigator.language,
   },
@@ -38,6 +39,6 @@ const oidcConfig: AuthProviderProps = {
   },
 };
 
-export default function Provider({ children }: PropsWithChildren) {
+export default function AppAuthProvider({ children }: PropsWithChildren) {
   return <AuthProvider {...oidcConfig}>{children}</AuthProvider>;
 }

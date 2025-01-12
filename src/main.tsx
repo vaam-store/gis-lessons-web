@@ -3,24 +3,21 @@ import './index.scss';
 
 import DefaultHead from '@comp/helmet';
 import { AuthProvider, SilentLogin } from '@mod/auth';
-import { i18nFn } from '@mod/i18n';
+import AppI18nProvider from '@mod/i18n';
 import Notification from '@mod/notification';
 import QueryWrapper from '@mod/query';
 import RouterProvider from '@mod/router';
 import Versioning from '@mod/versioning';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { I18nextProvider } from 'react-i18next';
 
-async function main() {
-  const i18n = await i18nFn();
-
+function main() {
   const container = document.getElementById('root')!;
   const root = createRoot(container);
 
   root.render(
     <StrictMode>
-      <I18nextProvider i18n={i18n}>
+      <AppI18nProvider>
         <AuthProvider>
           <QueryWrapper>
             <SilentLogin />
@@ -30,9 +27,9 @@ async function main() {
             <Notification />
           </QueryWrapper>
         </AuthProvider>
-      </I18nextProvider>
+      </AppI18nProvider>
     </StrictMode>,
   );
 }
 
-main().catch(console.error);
+main();
