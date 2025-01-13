@@ -6,7 +6,8 @@ import RevealMarkdown from 'reveal.js/plugin/markdown/markdown';
 import Notes from 'reveal.js/plugin/notes/notes';
 import RevealSearch from 'reveal.js/plugin/search/search';
 
-import './display.scss';
+import { CoreLessonBlock } from '@openapi/requests';
+import './presentation.scss';
 
 const htmlContent = (data: string) => `
 <section data-markdown data-separator="\n---\n" data-separator-vertical="\n------\n">
@@ -17,10 +18,10 @@ const htmlContent = (data: string) => `
 `;
 
 export interface DisplayProps {
-  data: string;
+  block: Extract<CoreLessonBlock, { type: 'slide' }>;
 }
 
-export default function Display({ data }: DisplayProps) {
+export default function LessonPresentation({ block: { content: data } }: DisplayProps) {
   const deckDivRef = useRef<HTMLDivElement>(null); // reference to deck container div
   const deckRef = useRef<Reveal.Api | null>(null); // reference to deck reveal instance
 

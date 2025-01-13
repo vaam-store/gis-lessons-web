@@ -15,7 +15,7 @@ externalDocs:
     Find out more about Managing your Lesson from afar. Let's meet on 
     our website 😉.
   url: https://blog.ssegning.com
-servers: []
+servers: [ ]
 tags:
   - name: lesson
     description: All about managing lesson
@@ -27,20 +27,8 @@ paths:
       summary: Get lessons
       operationId: getLessons
       parameters:
-        - name: limit
-          in: query
-          description: Number of items to return
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: offset
-          in: query
-          description: The number of items to skip before starting to collect the result set
-          required: false
-          schema:
-            type: integer
-            format: int32
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
       responses:
         200:
           description: 'successful operation'
@@ -48,8 +36,42 @@ paths:
             application/json:
               schema:
                 type: array
+                minItems: 1
+                maxItems: 10
                 items:
                   $ref: '#/components/schemas/Lesson'
+        400:
+          description: 'wrong content provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: 'Internal server'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - lesson
+      summary: Create lesson
+      security:
+        - bearerAuth: [ ]
+      operationId: createLesson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLesson'
+        required: true
+      responses:
+        201:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
         400:
           description: 'wrong content provided'
           content:
@@ -69,11 +91,7 @@ paths:
       summary: Get lesson
       operationId: getLesson
       parameters:
-        - name: slug_name_or_id
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Cuid'
+        - $ref: '#/components/parameters/slug_name_or_id'
       responses:
         200:
           description: 'successful operation'
@@ -93,32 +111,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /api/lessons/{slug_name_or_id}/slides/{slide_id}:
-    get:
+    put:
       tags:
         - lesson
-      summary: Get lesson slide
-      operationId: getLessonSlide
+      summary: Update lesson
+      operationId: updateLesson
+      security:
+        - bearerAuth: [ ]
       parameters:
-        - name: slug_name_or_id
-          in: path
-          required: true
-          description: The slug name or id of the lesson
-          schema:
-            $ref: '#/components/schemas/Cuid'
-        - name: slide_id
-          in: path
-          required: true
-          description: The id of the slide
-          schema:
-            $ref: '#/components/schemas/Cuid'
+        - $ref: '#/components/parameters/slug_name_or_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLesson'
+        required: true
       responses:
-        200:
+        201:
           description: 'successful operation'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LessonSlide'
+                $ref: '#/components/schemas/Lesson'
         400:
           description: 'wrong content provided'
           content:
@@ -131,32 +145,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /api/lessons/{slug_name_or_id}/course/{course_id}:
+  /api/lessons/{slug_name_or_id}/blocks:
     get:
       tags:
         - lesson
       summary: Get lesson course
-      operationId: getLessonCourse
+      operationId: getLessonBlocks
       parameters:
-        - name: slug_name_or_id
-          in: path
-          required: true
-          description: The slug name or id of the lesson
-          schema:
-            $ref: '#/components/schemas/Cuid'
-        - name: course_id
-          in: path
-          required: true
-          description: The id of the course
-          schema:
-            $ref: '#/components/schemas/Cuid'
+        - $ref: '#/components/parameters/slug_name_or_id'
       responses:
         200:
           description: 'successful operation'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LessonCourse'
+                type: array
+                minItems: 2
+                maxItems: 10
+                items:
+                  $ref: '#/components/schemas/LessonBlock'
         400:
           description: 'wrong content provided'
           content:
@@ -170,6 +177,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Number of items to return
+      required: false
+      schema:
+        type: integer
+        format: int32
+    offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set
+      required: false
+      schema:
+        type: integer
+        format: int32
+    slug_name_or_id:
+      name: slug_name_or_id
+      in: path
+      required: true
+      description: The slug name or id of the lesson
+      schema:
+        $ref: '#/components/schemas/Cuid'
   schemas:
     Model:
       type: object
@@ -182,6 +213,11 @@ components:
         updated_at:
           type: string
           format: date-time
+        meta:
+          type: object
+          additionalProperties: true
+          default: { }
+          example: { }
       required:
         - id
         - created_at
@@ -199,6 +235,14 @@ components:
         slug_name:
           type: string
           example: introduction-to-typescript
+        status:
+          type: string
+          enum:
+            - draft
+            - published
+            - archived
+          default: draft
+          example: draft
       required:
         - title
         - description
@@ -209,10 +253,12 @@ components:
         - $ref: '#/components/schemas/CoreLesson'
         - type: object
           properties:
-            course:
-              $ref: '#/components/schemas/CoreLessonCourse'
-            slides:
-              $ref: '#/components/schemas/CoreLessonSlide'
+            blocks:
+              type: array
+              minItems: 1
+              maxItems: 10
+              items:
+                $ref: '#/components/schemas/CoreLessonBlock'
           required:
             - course
             - slides
@@ -220,18 +266,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreLesson'
-        - type: object
-          properties:
-            course_id:
-              $ref: '#/components/schemas/Cuid'
-            slide_id:
-              $ref: '#/components/schemas/Cuid'
-          required:
-            - course_id
-            - slide_id
-    CoreLessonSlide:
+    SlideBlock:
       type: object
       properties:
+        type:
+          type: string
+          enum:
+            - slide
         content:
           type: string
           example: |
@@ -262,21 +303,22 @@ components:
             ```
       required:
         - content
-    LessonSlide:
-      allOf:
-        - $ref: '#/components/schemas/Model'
-        - $ref: '#/components/schemas/CoreLessonSlide'
-    CoreLessonCourse:
+        - type
+    CourseBlock:
       type: object
       properties:
+        type:
+          type: string
+          enum:
+            - content
         content:
           type: string
           example: |
             # This is a course
-
+            
             ## Lesson 1
             Some meaningful content
-
+            
             ## Lesson 2
             Some more meaningful content
             ```typescript
@@ -285,7 +327,7 @@ components:
             let c = x => 1 + 2 + x;
             c(3);
             ```
-
+            
             ## Lesson 3
             ```mermaid
             flowchart LR
@@ -297,10 +339,15 @@ components:
             ```
       required:
         - content
-    LessonCourse:
+        - type
+    CoreLessonBlock:
+      oneOf:
+        - $ref: '#/components/schemas/SlideBlock'
+        - $ref: '#/components/schemas/CourseBlock'
+    LessonBlock:
       allOf:
         - $ref: '#/components/schemas/Model'
-        - $ref: '#/components/schemas/CoreLessonCourse'
+        - $ref: '#/components/schemas/CoreLessonBlock'
     Error:
       type: object
       properties:
