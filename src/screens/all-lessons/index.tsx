@@ -1,10 +1,18 @@
 import { Container } from '@comp/container';
 import { SchoolList } from '@comp/school-list';
-import { useGetLessons } from '@openapi/queries';
+import { useListCourses } from '@openapi/queries';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 export default function AllSchools() {
-  const { data, error, isPending } = useGetLessons();
+  const [offset] = useState(0);
+  const { data, error, isPending } = useListCourses({
+    query: {
+      limit: 10,
+      offset,
+    },
+  });
+
   if (isPending) {
     return <div>Loading...</div>;
   }

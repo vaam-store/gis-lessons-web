@@ -17,7 +17,7 @@ export default function SingleLessonContent({
         <meta name='description' content={description} />
       </Helmet>
 
-      <LessonSlide slug_name_or_id={id} />
+      <LessonSlide lessonId={id} />
     </Container>
   );
 }

@@ -10,7 +10,7 @@ export default function SingleSchoolScreen() {
   const queryParam = useParams();
   const { error, data, isPending } = useGetLesson({
     path: {
-      slug_name_or_id: queryParam.slug_name!,
+      lessonId: queryParam.lessonId!,
     },
   });
 

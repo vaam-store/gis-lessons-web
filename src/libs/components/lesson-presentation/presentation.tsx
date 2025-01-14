@@ -6,7 +6,7 @@ import RevealMarkdown from 'reveal.js/plugin/markdown/markdown';
 import Notes from 'reveal.js/plugin/notes/notes';
 import RevealSearch from 'reveal.js/plugin/search/search';
 
-import { CoreLessonBlock } from '@openapi/requests';
+import { LessonBlock } from '@openapi/requests';
 import './presentation.scss';
 
 const htmlContent = (data: string) => `
@@ -18,10 +18,12 @@ const htmlContent = (data: string) => `
 `;
 
 export interface DisplayProps {
-  block: Extract<CoreLessonBlock, { type: 'slide' }>;
+  block: LessonBlock;
 }
 
-export default function LessonPresentation({ block: { content: data } }: DisplayProps) {
+export default function LessonPresentation({
+  block: { data },
+}: DisplayProps) {
   const deckDivRef = useRef<HTMLDivElement>(null); // reference to deck container div
   const deckRef = useRef<Reveal.Api | null>(null); // reference to deck reveal instance
 
@@ -66,7 +68,7 @@ export default function LessonPresentation({ block: { content: data } }: Display
       <div className='reveal' ref={deckDivRef}>
         <div
           className='slides'
-          dangerouslySetInnerHTML={{ __html: htmlContent(data) }}
+          dangerouslySetInnerHTML={{ __html: htmlContent(data.content as string) }}
         />
       </div>
     </div>

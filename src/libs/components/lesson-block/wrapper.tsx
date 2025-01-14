@@ -1,29 +1,35 @@
 import { useGetLessonBlocks } from '@openapi/queries';
 import { LessonBlock } from '@openapi/requests';
-import { JSX } from 'react';
+import * as _ from 'lodash';
+import { JSX, useMemo } from 'react';
 
 export interface LessonBlockWrapperProps {
-  slug_name_or_id: string;
+  lessonId: string;
   children: (params: { blocks: LessonBlock[] }) => JSX.Element;
 }
 
 export default function LessonBlockWrapper({
   children,
-  slug_name_or_id,
+  lessonId,
 }: LessonBlockWrapperProps) {
   const { data, isPending, isError, error } = useGetLessonBlocks({
     path: {
-      slug_name_or_id,
+      lessonId,
     },
   });
+
+  const blocks = useMemo(
+    () => _.sortBy(Object.entries(data || {}), '0').map(([, b]) => b),
+    [data],
+  );
 
   if (isPending) {
     return <div>Loading...</div>;
   }
 
-  if (isError || !data || error) {
+  if (isError || !blocks || error) {
     return <div>Error</div>;
   }
 
-  return children({ blocks: data });
+  return children({ blocks });
 }

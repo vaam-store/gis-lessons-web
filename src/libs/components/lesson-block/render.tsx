@@ -3,14 +3,14 @@ import { LessonCourse } from '@comp/lesson-course';
 import { LessonPresentation } from '@comp/lesson-presentation';
 
 export interface LessonSlideRenderWrapperProps {
-  slug_name_or_id: string;
+  lessonId: string;
 }
 
 export default function LessonBlockRender({
-  slug_name_or_id,
+  lessonId,
 }: LessonSlideRenderWrapperProps) {
   return (
-    <LessonBlockWrapper slug_name_or_id={slug_name_or_id}>
+    <LessonBlockWrapper lessonId={lessonId}>
       {({ blocks }) => (
         <>
           {blocks.map((block) => {

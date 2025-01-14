@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
             errorElement: <ErrorPage />,
           },
           {
-            path: ':slug_name',
+            path: ':lessonId',
             element: <SingleLesson />,
             loader: lessonLoader(queryClient),
             errorElement: <ErrorPage />,

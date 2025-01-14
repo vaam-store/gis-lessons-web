@@ -1,13 +1,13 @@
 import { MarkdownToHtmlWrapper } from '@mod/converters';
-import { CoreLessonBlock } from '@openapi/requests';
+import { LessonBlock } from '@openapi/requests';
 
 interface LessonCourseProps {
-  block: Extract<CoreLessonBlock, { type: 'content' }>;
+  block: LessonBlock;
 }
 
-export default function LessonCourse({ block }: LessonCourseProps) {
+export default function LessonCourse({ block: { data } }: LessonCourseProps) {
   return (
-    <MarkdownToHtmlWrapper content={block.content}>
+    <MarkdownToHtmlWrapper content={data.content as string}>
       {(html) => (
         <article
           className='prose prose-lg mx-auto mt-4 lg:prose-2xl md:mt-8'
