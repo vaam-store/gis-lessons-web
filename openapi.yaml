@@ -1249,9 +1249,11 @@ components:
       type: object
       properties:
         limit:
-          $ref: '#/components/parameters/limit'
+          type: integer
+          format: int32
         offset:
-          $ref: '#/components/parameters/offset'
+          type: integer
+          format: int32
         total:
           type: integer
           format: int32
