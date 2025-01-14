@@ -8,9 +8,12 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { VitePWA } from 'vite-plugin-pwa';
 import { robots } from 'vite-plugin-robots';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import basex from 'base-x';
 
-const base64Encode = (plaintext: string): string => {
-  return Buffer.from(plaintext).toString('base64');
+const baseEncode = (plaintext: string): string => {
+  const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-\'._~!$&()*+,;=:@';
+  const converter = basex(base);
+  return converter.encode(Buffer.from(plaintext));
 };
 
 // https://vite.dev/config/
@@ -109,7 +112,7 @@ export default defineConfig({
               .split('node_modules/')[1]
               .split('/')[0]
               .toString();
-            return cleanName + '-' + base64Encode(cleanName);
+            return baseEncode(cleanName);
           }
         },
         chunkFileNames: 'assets/chunks/[name]-[hash].js',

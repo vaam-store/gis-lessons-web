@@ -1,6 +1,7 @@
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:${KC_VERSION}
+    restart: unless-stopped
     ports:
       - '9100:9100'
     environment:

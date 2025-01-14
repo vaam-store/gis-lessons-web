@@ -10,7 +10,7 @@ const { envVariables } = getProjectEnvVariables();
 
 client.setConfig({
   baseUrl: envVariables.VITE_BACKEND_URL,
-  throwOnError: true, // If you want to handle errors on `onError` callback of `useQuery` and `useMutation`, set this to `true`
+  throwOnError: true,
 });
 
 client.interceptors.request.use((config) => {

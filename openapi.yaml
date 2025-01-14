@@ -37,7 +37,7 @@ paths:
               schema:
                 type: array
                 minItems: 1
-                maxItems: 10
+                maxItems: 100
                 items:
                   $ref: '#/components/schemas/Lesson'
         400:
@@ -160,8 +160,8 @@ paths:
             application/json:
               schema:
                 type: array
-                minItems: 2
-                maxItems: 10
+                minItems: 1
+                maxItems: 100
                 items:
                   $ref: '#/components/schemas/LessonBlock'
         400:
@@ -256,7 +256,7 @@ components:
             blocks:
               type: array
               minItems: 1
-              maxItems: 10
+              maxItems: 100
               items:
                 $ref: '#/components/schemas/CoreLessonBlock'
           required:
