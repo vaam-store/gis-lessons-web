@@ -983,9 +983,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreStudent'
     StudentCreate:
-      $ref: '#/components/schemas/CoreStudent'
+      allOf:
+        - $ref: '#/components/schemas/CoreStudent'
     StudentUpdate:
-      $ref: '#/components/schemas/CoreStudent'
+      allOf:
+        - $ref: '#/components/schemas/CoreStudent'
 
     #-------------------------------------------------------
     # INSTRUCTOR
@@ -1002,9 +1004,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreInstructor'
     InstructorCreate:
-      $ref: '#/components/schemas/CoreInstructor'
+      allOf:
+        - $ref: '#/components/schemas/CoreInstructor'
     InstructorUpdate:
-      $ref: '#/components/schemas/CoreInstructor'
+      allOf:
+        - $ref: '#/components/schemas/CoreInstructor'
 
     #-------------------------------------------------------
     # COURSE
@@ -1028,9 +1032,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreCourse'
     CourseCreate:
-      $ref: '#/components/schemas/CoreCourse'
+      allOf:
+        - $ref: '#/components/schemas/CoreCourse'
     CourseUpdate:
-      $ref: '#/components/schemas/CoreCourse'
+      allOf:
+        - $ref: '#/components/schemas/CoreCourse'
 
     #-------------------------------------------------------
     # ENROLLMENT
@@ -1053,9 +1059,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreEnrollment'
     EnrollmentCreate:
-      $ref: '#/components/schemas/CoreEnrollment'
+      allOf:
+        - $ref: '#/components/schemas/CoreEnrollment'
     EnrollmentUpdate:
-      $ref: '#/components/schemas/CoreEnrollment'
+      allOf:
+        - $ref: '#/components/schemas/CoreEnrollment'
 
     #-------------------------------------------------------
     # MODULE
@@ -1076,9 +1084,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreModule'
     ModuleCreate:
-      $ref: '#/components/schemas/CoreModule'
+      allOf:
+        - $ref: '#/components/schemas/CoreModule'
     ModuleUpdate:
-      $ref: '#/components/schemas/CoreModule'
+      allOf:
+        - $ref: '#/components/schemas/CoreModule'
 
     #-------------------------------------------------------
     # LESSON
@@ -1165,9 +1175,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreAssignment'
     AssignmentCreate:
-      $ref: '#/components/schemas/CoreAssignment'
+      allOf:
+        - $ref: '#/components/schemas/CoreAssignment'
     AssignmentUpdate:
-      $ref: '#/components/schemas/CoreAssignment'
+      allOf:
+        - $ref: '#/components/schemas/CoreAssignment'
 
     #-------------------------------------------------------
     # SUBMISSION
@@ -1189,9 +1201,11 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreSubmission'
     SubmissionCreate:
-      $ref: '#/components/schemas/CoreSubmission'
+      allOf:
+        - $ref: '#/components/schemas/CoreSubmission'
     SubmissionUpdate:
-      $ref: '#/components/schemas/CoreSubmission'
+      allOf:
+        - $ref: '#/components/schemas/CoreSubmission'
 
     #-------------------------------------------------------
     # ACTIVITY
@@ -1262,7 +1276,8 @@ components:
         - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreComment'
     CommentCreate:
-      $ref: '#/components/schemas/CoreComment'
+      allOf:
+        - $ref: '#/components/schemas/CoreComment'
 
     #-------------------------------------------------------
     # PAGINATION
