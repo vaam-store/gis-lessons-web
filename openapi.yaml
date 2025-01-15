@@ -957,13 +957,13 @@ components:
       required:
         - id
         - created_at
-        - update_at
+        - updated_at
       properties:
         id:
           $ref: '#/components/schemas/Cuid'
         created_at:
           $ref: '#/components/schemas/DateTime'
-        update_at:
+        updated_at:
           $ref: '#/components/schemas/DateTime'
         meta:
           type: object
