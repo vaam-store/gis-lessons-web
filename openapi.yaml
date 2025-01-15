@@ -968,7 +968,7 @@ components:
         meta:
           type: object
           additionalProperties: true
-          default: {}
+          default: { }
     
     #-------------------------------------------------------
     # STUDENT
@@ -1198,6 +1198,24 @@ components:
     #-------------------------------------------------------
     # ACTIVITY
     #-------------------------------------------------------
+    ActivityType:
+      type: string
+      enum:
+        - create
+        - delete
+        - update
+    ActivityEntityType:
+      type: string
+      enum:
+        - student
+        - instructor
+        - course
+        - enrollment
+        - module
+        - assignment
+        - submission
+        - activity
+        - comment
     CoreActivity:
       type: object
       properties:
@@ -1206,25 +1224,17 @@ components:
         entity_id:
           $ref: '#/components/schemas/Cuid'
         entity_type:
-          type: string
-          enum:
-            - student
-            - instructor
-            - course
-            - enrollment
-            - module
-            - assignment
-            - submission
-            - activity
-            - comment
+          $ref: '#/components/schemas/ActivityEntityType'
         content:
           type: string
         action_type:
-          type: string
-          enum:
-            - create
-            - delete
-            - update
+          $ref: '#/components/schemas/ActivityType'
+      required:
+        - user_id
+        - entity_id
+        - entity_type
+        - content
+        - action_type
     Activity:
       allOf:
         - $ref: '#/components/schemas/Model'
