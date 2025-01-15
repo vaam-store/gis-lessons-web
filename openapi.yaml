@@ -473,15 +473,25 @@ paths:
   ##########################################################################
   # LESSONS
   ##########################################################################
-  /courses/{courseId}/modules/{moduleId}/lessons:
+  /lessons:
     get:
       summary: List all Lessons
       operationId: listLesson
       tags:
         - Lessons
       parameters:
-        - $ref: '#/components/parameters/courseId'
-        - $ref: '#/components/parameters/moduleId'
+        - name: courseId
+          in: query
+          required: true
+          description: The ID of the course to retrieve
+          schema:
+            $ref: '#/components/schemas/Cuid'
+        - name: moduleId
+          in: path
+          required: true
+          description: The ID of the module to retrieve
+          schema:
+            $ref: '#/components/schemas/Cuid'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search_query'
@@ -492,7 +502,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PageLesson'
-  /lessons:
     post:
       summary: Create a new Lesson
       operationId: createLesson
