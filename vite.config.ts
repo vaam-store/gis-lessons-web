@@ -1,6 +1,7 @@
 import { webUpdateNotice } from '@plugin-web-update-notification/vite';
 import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
+import basex from 'base-x';
 import { Buffer } from 'buffer';
 import { defineConfig } from 'vite';
 import bundlesize from 'vite-plugin-bundlesize';
@@ -8,10 +9,10 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { VitePWA } from 'vite-plugin-pwa';
 import { robots } from 'vite-plugin-robots';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import basex from 'base-x';
 
 const baseEncode = (plaintext: string): string => {
-  const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-\'._~!$&()*+,;=:@';
+  const base =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-'._~!$&()*+,;=:@";
   const converter = basex(base);
   return converter.encode(Buffer.from(plaintext));
 };

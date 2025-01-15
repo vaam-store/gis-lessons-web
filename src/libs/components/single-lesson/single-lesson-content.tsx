@@ -1,7 +1,7 @@
 import { Container } from '@comp/container';
+import { LessonSlide } from '@comp/lesson-block';
 import { Lesson } from '@openapi/requests';
 import { Helmet } from 'react-helmet';
-import { LessonSlide } from '@comp/lesson-block';
 
 export interface SingleLessonContentProps {
   data: Lesson;
