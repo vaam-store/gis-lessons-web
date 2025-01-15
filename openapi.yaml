@@ -965,6 +965,10 @@ components:
           $ref: '#/components/schemas/DateTime'
         update_at:
           $ref: '#/components/schemas/DateTime'
+        meta:
+          additionalProperties: true
+          default: '{}'
+    
     #-------------------------------------------------------
     # STUDENT
     #-------------------------------------------------------
@@ -1257,15 +1261,20 @@ components:
     CorePage:
       type: object
       properties:
-        limit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        total:
-          type: integer
-          format: int32
+        meta:
+          type: object
+          required:
+            - limit
+            - offset
+            - total
+          properties:
+            limit:
+              $ref: '#/components/parameters/limit'
+            offset:
+              $ref: '#/components/parameters/offset'
+            total:
+              type: integer
+              format: int32
     PageStudent:
       allOf:
         - $ref: '#/components/schemas/CorePage'
