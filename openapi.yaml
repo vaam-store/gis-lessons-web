@@ -966,8 +966,9 @@ components:
         update_at:
           $ref: '#/components/schemas/DateTime'
         meta:
+          type: object
           additionalProperties: true
-          default: '{}'
+          default: {}
     
     #-------------------------------------------------------
     # STUDENT
