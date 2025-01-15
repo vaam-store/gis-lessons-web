@@ -955,20 +955,26 @@ components:
       type: string
       format: date-time
     Model:
+      allOf:
+        - $ref: '#/components/schemas/WithMeta'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              $ref: '#/components/schemas/Cuid'
+            created_at:
+              $ref: '#/components/schemas/DateTime'
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
+    Meta:
       type: object
-      required:
-        - id
+      additionalProperties: true
+      default: { }
+    WithMeta:
       properties:
-        id:
-          $ref: '#/components/schemas/Cuid'
-        created_at:
-          $ref: '#/components/schemas/DateTime'
-        updated_at:
-          $ref: '#/components/schemas/DateTime'
         meta:
-          type: object
-          additionalProperties: true
-          default: { }
+          $ref: '#/components/schemas/Meta'
     
     #-------------------------------------------------------
     # STUDENT
@@ -987,9 +993,11 @@ components:
     StudentCreate:
       allOf:
         - $ref: '#/components/schemas/CoreStudent'
+        - $ref: '#/components/schemas/WithMeta'
     StudentUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreStudent'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # INSTRUCTOR
@@ -1008,9 +1016,11 @@ components:
     InstructorCreate:
       allOf:
         - $ref: '#/components/schemas/CoreInstructor'
+        - $ref: '#/components/schemas/WithMeta'
     InstructorUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreInstructor'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # COURSE
@@ -1036,9 +1046,11 @@ components:
     CourseCreate:
       allOf:
         - $ref: '#/components/schemas/CoreCourse'
+        - $ref: '#/components/schemas/WithMeta'
     CourseUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreCourse'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # ENROLLMENT
@@ -1063,9 +1075,11 @@ components:
     EnrollmentCreate:
       allOf:
         - $ref: '#/components/schemas/CoreEnrollment'
+        - $ref: '#/components/schemas/WithMeta'
     EnrollmentUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreEnrollment'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # MODULE
@@ -1088,9 +1102,11 @@ components:
     ModuleCreate:
       allOf:
         - $ref: '#/components/schemas/CoreModule'
+        - $ref: '#/components/schemas/WithMeta'
     ModuleUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreModule'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # LESSON
@@ -1131,6 +1147,7 @@ components:
     LessonCreate:
       allOf:
         - $ref: '#/components/schemas/CoreLesson'
+        - $ref: '#/components/schemas/WithMeta'
         - type: object
           required:
             - blocks
@@ -1141,6 +1158,7 @@ components:
     LessonUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreLesson'
+        - $ref: '#/components/schemas/WithMeta'
         - type: object
           required:
             - blocks
@@ -1179,9 +1197,11 @@ components:
     AssignmentCreate:
       allOf:
         - $ref: '#/components/schemas/CoreAssignment'
+        - $ref: '#/components/schemas/WithMeta'
     AssignmentUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreAssignment'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # SUBMISSION
@@ -1205,9 +1225,11 @@ components:
     SubmissionCreate:
       allOf:
         - $ref: '#/components/schemas/CoreSubmission'
+        - $ref: '#/components/schemas/WithMeta'
     SubmissionUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreSubmission'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # ACTIVITY
@@ -1280,13 +1302,14 @@ components:
     CommentCreate:
       allOf:
         - $ref: '#/components/schemas/CoreComment'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # PAGINATION
     #-------------------------------------------------------
     CorePage:
       type: object
-      required: 
+      required:
         - meta
       properties:
         meta:
