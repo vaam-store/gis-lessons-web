@@ -1284,6 +1284,8 @@ components:
     #-------------------------------------------------------
     CorePage:
       type: object
+      required: 
+        - meta
       properties:
         meta:
           type: object
