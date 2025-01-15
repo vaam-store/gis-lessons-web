@@ -926,7 +926,7 @@ components:
       required: false
       schema:
         type: integer
-        format: int32
+        format: int64
         default: 10
     offset:
       name: offset
@@ -935,7 +935,7 @@ components:
       required: false
       schema:
         type: integer
-        format: int32
+        format: int64
         default: 0
     search_query:
       name: q
@@ -1298,13 +1298,13 @@ components:
           properties:
             limit:
               type: integer
-              format: int32
+              format: int64
             offset:
               type: integer
-              format: int32
+              format: int64
             total:
               type: integer
-              format: int32
+              format: int64
     PageStudent:
       allOf:
         - $ref: '#/components/schemas/CorePage'
