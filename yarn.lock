@@ -2912,23 +2912,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/context-zone-peer-dep@npm:1.30.0":
-  version: 1.30.0
-  resolution: "@opentelemetry/context-zone-peer-dep@npm:1.30.0"
+"@opentelemetry/context-zone-peer-dep@npm:1.30.1":
+  version: 1.30.1
+  resolution: "@opentelemetry/context-zone-peer-dep@npm:1.30.1"
   peerDependencies:
     "@opentelemetry/api": ">=1.0.0 <1.10.0"
     zone.js: ^0.10.2 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0
-  checksum: 10c0/9ab75908d9d4e8abdf2b359f26569e2118365b150793bb6b40d720de081beda0b1cc59a17cb5f2d01ebc245d01ba6ea1be7e2ee39a5bd19daf8c24ebc47e6a98
+  checksum: 10c0/7439f08cc12c7678bb1ef7ed955930377bfa503c46dbae33545d15fc9ebd2af38ea5385c015fb99218850a4f7eb4f02d395f65592716b1c25a94a4a798e481e5
   languageName: node
   linkType: hard
 
-"@opentelemetry/context-zone@npm:^1.30.0":
-  version: 1.30.0
-  resolution: "@opentelemetry/context-zone@npm:1.30.0"
+"@opentelemetry/context-zone@npm:^1.30.1":
+  version: 1.30.1
+  resolution: "@opentelemetry/context-zone@npm:1.30.1"
   dependencies:
-    "@opentelemetry/context-zone-peer-dep": "npm:1.30.0"
+    "@opentelemetry/context-zone-peer-dep": "npm:1.30.1"
     zone.js: "npm:^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0"
-  checksum: 10c0/7a56cdf301b6d59adece40e85af88ebd26d371bf7615d41f90264876d3ff1626823587baef5cafea3ba9763b5b89ff9fe950c3560334cce7a34f58f4c0bdeaaf
+  checksum: 10c0/40ca351cd2a29a5170386fa23dc8db0a827fa273e900ea5e7f07d2bb04968d6157957ca4312b31def29dbae07386160c8601577b7244b6fffe1b6e260202a33a
   languageName: node
   linkType: hard
 
@@ -14886,7 +14886,7 @@ __metadata:
     "@fontsource/roboto": "npm:^5.1.1"
     "@opentelemetry/api": "npm:^1.9.0"
     "@opentelemetry/auto-instrumentations-web": "npm:^0.45.0"
-    "@opentelemetry/context-zone": "npm:^1.30.0"
+    "@opentelemetry/context-zone": "npm:^1.30.1"
     "@opentelemetry/exporter-trace-otlp-http": "npm:^0.57.0"
     "@opentelemetry/resources": "npm:^1.30.0"
     "@opentelemetry/sdk-trace-web": "npm:^1.30.0"
