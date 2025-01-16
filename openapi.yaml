@@ -15,7 +15,24 @@ externalDocs:
     Find out more about Managing your Course from afar. Let's meet on 
     our website 😉.
   url: https://blog.ssegning.com
-servers: [ ]
+servers:
+  - url: 'https://api.sschool.app'
+    description: Production server
+  - url: 'http://localhost:3000'
+    description: Development server
+  - url: '{scheme}://{host}:{port}'
+    description: Custom server
+    variables:
+      scheme:
+        enum:
+          - http
+          - https
+        default: http
+      host:
+        default: localhost
+      port:
+        default: '3000'
+
 tags:
   - name: Courses
     description: All about managing course
@@ -29,6 +46,9 @@ paths:
       operationId: listStudents
       tags:
         - Students
+      security:
+        - bearerAuth:
+            - read:students
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -45,6 +65,9 @@ paths:
       operationId: createStudent
       tags:
         - Students
+      security:
+        - bearerAuth:
+            - write:students
       requestBody:
         required: true
         content:
@@ -64,6 +87,9 @@ paths:
       operationId: getStudent
       tags:
         - Students
+      security:
+        - bearerAuth:
+            - read:students
       parameters:
         - $ref: '#/components/parameters/studentId'
       responses:
@@ -80,6 +106,9 @@ paths:
       operationId: updateStudent
       tags:
         - Students
+      security:
+        - bearerAuth:
+            - write:students
       parameters:
         - $ref: '#/components/parameters/studentId'
       requestBody:
@@ -102,6 +131,9 @@ paths:
       operationId: deleteStudent
       tags:
         - Students
+      security:
+        - bearerAuth:
+            - write:students
       parameters:
         - $ref: '#/components/parameters/studentId'
       responses:
@@ -119,6 +151,9 @@ paths:
       operationId: listInstructors
       tags:
         - Instructors
+      security:
+        - bearerAuth:
+            - read:instructors
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -135,6 +170,9 @@ paths:
       operationId: createInstructor
       tags:
         - Instructors
+      security:
+        - bearerAuth:
+            - write:instructors
       requestBody:
         required: true
         content:
@@ -154,6 +192,9 @@ paths:
       operationId: getInstructor
       tags:
         - Instructors
+      security:
+        - bearerAuth:
+            - read:instructors
       parameters:
         - $ref: '#/components/parameters/instructorId'
       responses:
@@ -170,6 +211,9 @@ paths:
       operationId: updateInstructor
       tags:
         - Instructors
+      security:
+        - bearerAuth:
+            - write:instructors
       parameters:
         - $ref: '#/components/parameters/instructorId'
       requestBody:
@@ -192,6 +236,9 @@ paths:
       operationId: deleteInstructor
       tags:
         - Instructors
+      security:
+        - bearerAuth:
+            - write:instructors
       parameters:
         - $ref: '#/components/parameters/instructorId'
       responses:
@@ -209,6 +256,9 @@ paths:
       operationId: listCourses
       tags:
         - Courses
+      security:
+        - bearerAuth:
+            - read:courses
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -225,6 +275,9 @@ paths:
       operationId: createCourse
       tags:
         - Courses
+      security:
+        - bearerAuth:
+            - write:courses
       requestBody:
         required: true
         content:
@@ -244,6 +297,9 @@ paths:
       operationId: getCourse
       tags:
         - Courses
+      security:
+        - bearerAuth:
+            - read:courses
       parameters:
         - $ref: '#/components/parameters/courseId'
       responses:
@@ -260,6 +316,9 @@ paths:
       operationId: updateCourse
       tags:
         - Courses
+      security:
+        - bearerAuth:
+            - write:courses
       parameters:
         - $ref: '#/components/parameters/courseId'
       requestBody:
@@ -282,6 +341,9 @@ paths:
       operationId: deleteCourse
       tags:
         - Courses
+      security:
+        - bearerAuth:
+            - write:courses
       parameters:
         - $ref: '#/components/parameters/courseId'
       responses:
@@ -299,6 +361,9 @@ paths:
       operationId: listEnrollments
       tags:
         - Enrollments
+      security:
+        - bearerAuth:
+            - read:enrollments
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -315,6 +380,9 @@ paths:
       operationId: createEnrollment
       tags:
         - Enrollments
+      security:
+        - bearerAuth:
+            - write:enrollments
       requestBody:
         required: true
         content:
@@ -334,6 +402,9 @@ paths:
       operationId: getEnrollment
       tags:
         - Enrollments
+      security:
+        - bearerAuth:
+            - read:enrollments
       parameters:
         - $ref: '#/components/parameters/enrollmentId'
       responses:
@@ -350,6 +421,9 @@ paths:
       operationId: updateEnrollment
       tags:
         - Enrollments
+      security:
+        - bearerAuth:
+            - write:enrollments
       parameters:
         - $ref: '#/components/parameters/enrollmentId'
       requestBody:
@@ -372,6 +446,9 @@ paths:
       operationId: deleteEnrollment
       tags:
         - Enrollments
+      security:
+        - bearerAuth:
+            - write:enrollments
       parameters:
         - $ref: '#/components/parameters/enrollmentId'
       responses:
@@ -389,6 +466,9 @@ paths:
       operationId: listModules
       tags:
         - Modules
+      security:
+        - bearerAuth:
+            - read:modules
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -405,6 +485,9 @@ paths:
       operationId: createModule
       tags:
         - Modules
+      security:
+        - bearerAuth:
+            - write:modules
       requestBody:
         required: true
         content:
@@ -424,6 +507,9 @@ paths:
       operationId: getModule
       tags:
         - Modules
+      security:
+        - bearerAuth:
+            - read:modules
       parameters:
         - $ref: '#/components/parameters/moduleId'
       responses:
@@ -440,6 +526,9 @@ paths:
       operationId: updateModule
       tags:
         - Modules
+      security:
+        - bearerAuth:
+            - write:modules
       parameters:
         - $ref: '#/components/parameters/moduleId'
       requestBody:
@@ -462,6 +551,9 @@ paths:
       operationId: deleteModule
       tags:
         - Modules
+      security:
+        - bearerAuth:
+            - write:modules
       parameters:
         - $ref: '#/components/parameters/moduleId'
       responses:
@@ -479,6 +571,9 @@ paths:
       operationId: listLesson
       tags:
         - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
       parameters:
         - name: courseId
           in: query
@@ -507,6 +602,9 @@ paths:
       operationId: createLesson
       tags:
         - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
       requestBody:
         required: true
         content:
@@ -526,6 +624,9 @@ paths:
       operationId: getLessonBlocks
       tags:
         - Lessons
+      security:
+        - bearerAuth:
+            - read:lessons
       parameters:
         - $ref: '#/components/parameters/lessonId'
       responses:
@@ -545,6 +646,9 @@ paths:
       operationId: getLesson
       tags:
         - Lessons
+      security:
+        - bearerAuth:
+            - read:lessons
       parameters:
         - $ref: '#/components/parameters/lessonId'
       responses:
@@ -561,6 +665,9 @@ paths:
       operationId: updateLesson
       tags:
         - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
       parameters:
         - $ref: '#/components/parameters/lessonId'
       requestBody:
@@ -583,6 +690,9 @@ paths:
       operationId: deleteLesson
       tags:
         - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
       parameters:
         - $ref: '#/components/parameters/lessonId'
       responses:
@@ -600,6 +710,9 @@ paths:
       operationId: listAssignments
       tags:
         - Assignments
+      security:
+        - bearerAuth:
+            - read:assignments
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -616,6 +729,9 @@ paths:
       operationId: createAssignment
       tags:
         - Assignments
+      security:
+        - bearerAuth:
+            - write:assignments
       requestBody:
         required: true
         content:
@@ -635,6 +751,9 @@ paths:
       operationId: getAssignment
       tags:
         - Assignments
+      security:
+        - bearerAuth:
+            - read:assignments
       parameters:
         - $ref: '#/components/parameters/assignmentId'
       responses:
@@ -651,6 +770,9 @@ paths:
       operationId: updateAssignment
       tags:
         - Assignments
+      security:
+        - bearerAuth:
+            - write:assignments
       parameters:
         - $ref: '#/components/parameters/assignmentId'
       requestBody:
@@ -673,6 +795,9 @@ paths:
       operationId: deleteAssignment
       tags:
         - Assignments
+      security:
+        - bearerAuth:
+            - write:assignments
       parameters:
         - $ref: '#/components/parameters/assignmentId'
       responses:
@@ -690,6 +815,9 @@ paths:
       operationId: listSubmissions
       tags:
         - Submissions
+      security:
+        - bearerAuth:
+            - read:submissions
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -706,6 +834,9 @@ paths:
       operationId: createSubmission
       tags:
         - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
       requestBody:
         required: true
         content:
@@ -725,6 +856,9 @@ paths:
       operationId: getSubmission
       tags:
         - Submissions
+      security:
+        - bearerAuth:
+            - read:submissions
       parameters:
         - $ref: '#/components/parameters/submissionId'
       responses:
@@ -741,6 +875,9 @@ paths:
       operationId: updateSubmission
       tags:
         - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
       parameters:
         - $ref: '#/components/parameters/submissionId'
       requestBody:
@@ -763,6 +900,9 @@ paths:
       operationId: deleteSubmission
       tags:
         - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
       parameters:
         - $ref: '#/components/parameters/submissionId'
       responses:
@@ -776,6 +916,9 @@ paths:
       operationId: getSubmissionActivities
       tags:
         - Activities
+      security:
+        - bearerAuth:
+            - read:activities
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -800,6 +943,9 @@ paths:
       operationId: listComments
       tags:
         - Comments
+      security:
+        - bearerAuth:
+            - read:comments
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
@@ -816,6 +962,9 @@ paths:
       operationId: createComment
       tags:
         - Comments
+      security:
+        - bearerAuth:
+            - write:comments
       requestBody:
         required: true
         content:
@@ -835,6 +984,9 @@ paths:
       operationId: getComment
       tags:
         - Comments
+      security:
+        - bearerAuth:
+            - read:comments
       parameters:
         - $ref: '#/components/parameters/commentId'
       responses:
@@ -1438,3 +1590,29 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Lesson'
+
+security:
+  - bearerAuth:
+      - read:courses
+      - write:courses
+      - read:lessons
+      - write:lessons
+      - read:assignments
+      - write:assignments
+      - read:submissions
+      - write:submissions
+      - read:comments
+      - write:comments
+      - read:activities
+      - write:activities
+      - read:modules
+      - write:modules
+      - read:enrollments
+      - write:enrollments
+      - read:students
+      - write:students
+      - read:instructors
+      - write:instructors
+      - read:users
+      - write:users
+    
