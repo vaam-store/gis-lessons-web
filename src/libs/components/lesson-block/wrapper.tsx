@@ -19,10 +19,10 @@ export default function LessonBlockWrapper({
   });
 
   const blocks = useMemo(
-    () => _.sortBy(Object.entries(data || {}), '0').map(([, b]) => b),
+    () => _.sortBy(Object.entries(data || {}), 0).map(([, b]) => b),
     [data],
   );
-
+  
   if (isPending) {
     return <div>Loading...</div>;
   }

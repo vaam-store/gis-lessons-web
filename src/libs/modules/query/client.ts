@@ -13,8 +13,8 @@ client.setConfig({
   throwOnError: true,
 });
 
-client.interceptors.request.use((config) => {
-  const user = getUserStatic();
+client.interceptors.request.use(async (config) => {
+  const user = await getUserStatic();
   if (user) {
     config.headers.set('Authorization', `Bearer ${user.access_token}`);
   }

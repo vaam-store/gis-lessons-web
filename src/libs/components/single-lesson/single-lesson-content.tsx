@@ -1,5 +1,5 @@
 import { Container } from '@comp/container';
-import { LessonSlide } from '@comp/lesson-block';
+import { LessonBlockRender } from '@comp/lesson-block';
 import { Lesson } from '@openapi/requests';
 import { Helmet } from 'react-helmet';
 
@@ -17,7 +17,7 @@ export default function SingleLessonContent({
         <meta name='description' content={description} />
       </Helmet>
 
-      <LessonSlide lessonId={id} />
+      <LessonBlockRender lessonId={id} />
     </Container>
   );
 }

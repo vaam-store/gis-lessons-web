@@ -470,6 +470,12 @@ paths:
         - bearerAuth:
             - read:modules
       parameters:
+        - name: courseId
+          in: query
+          required: true
+          description: The ID of the course to retrieve
+          schema:
+            $ref: '#/components/schemas/Cuid'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search_query'
@@ -1188,6 +1194,12 @@ components:
         description:
           type: string
           example: Basic programming concepts using Python
+        longDescription:
+          type: string
+          example: |
+            This course introduces students to the basic concepts of programming.
+            It covers variables, data types, and basic operations.
+            We will use Python as the programming language.
       required:
         - name
         - slug
@@ -1247,6 +1259,11 @@ components:
         description:
           type: string
           example: Introduction to fundamental programming concepts
+        longDescription:
+          type: string
+          example: |
+            This module introduces students to the basic concepts of programming.
+            It covers variables, data types, and basic operations.
     Module:
       allOf:
         - $ref: '#/components/schemas/Model'
@@ -1283,11 +1300,22 @@ components:
           enum:
             - slide
             - content
-        data:
-          additionalProperties: true
+        content:
+          type: string
+          example: |
+            This is a slide content
+            ---
+            This is another slide content
+            ---
+            This is a content block
+            ------
+            This is another content block
+            ---
+            This is a slide content
       required:
         - type
         - data
+        - content
     LessonBlock:
       allOf:
         - $ref: '#/components/schemas/Model'
@@ -1489,6 +1517,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Student'
     PageInstructor:
@@ -1500,6 +1529,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Instructor'
     PageCourse:
@@ -1511,6 +1541,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Course'
     PageEnrollment:
@@ -1522,6 +1553,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Enrollment'
     PageModule:
@@ -1533,6 +1565,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Module'
     PageAssignment:
@@ -1544,6 +1577,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Assignment'
     PageSubmission:
@@ -1555,6 +1589,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Submission'
     PageActivity:
@@ -1566,6 +1601,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Activity'
     PageComment:
@@ -1577,6 +1613,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Comment'
     PageLesson:
@@ -1588,6 +1625,7 @@ components:
           properties:
             items:
               type: array
+              minItems: 10
               items:
                 $ref: '#/components/schemas/Lesson'
 

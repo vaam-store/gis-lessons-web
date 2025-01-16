@@ -4,7 +4,11 @@ import { Button } from 'react-daisyui';
 import { LogIn, LogOut } from 'react-feather';
 import { useTranslation } from 'react-i18next';
 
-export default function LoginButton() {
+interface LoginButtonProps {
+  responsive?: boolean;
+}
+
+export default function LoginButton({ responsive = true }: LoginButtonProps) {
   const auth = useLoginAuth();
   const { i18n, t } = useTranslation('auth');
   const toggle = useCallback(async () => {
@@ -27,7 +31,8 @@ export default function LoginButton() {
   return (
     <Button
       shape='circle'
-      responsive
+      variant='outline'
+      responsive={responsive}
       title={t(auth.isAuthenticated ? 'logout' : 'login')}
       color={auth.isAuthenticated ? 'error' : 'success'}
       onClick={toggle}

@@ -1,23 +1,35 @@
-import { CoreCourse } from '@openapi/requests';
-import { Button, Card } from 'react-daisyui';
+import { Course } from '@openapi/requests';
+import { Button } from 'react-daisyui';
+import { ArrowRight, Star } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 
 export interface LessonCardProps {
-  course: CoreCourse;
+  course: Course;
 }
 
 export function LessonCard({ course }: LessonCardProps) {
   return (
-    <NavLink to={`/lessons/${course.slug}`}>
-      <Card className='bg-secondary'>
-        <Card.Body>
-          <Card.Title tag='h2'>{course.name}</Card.Title>
-          <p>{course.description}</p>
-          <Card.Actions className='justify-end'>
-            <Button>View</Button>
-          </Card.Actions>
-        </Card.Body>
-      </Card>
-    </NavLink>
+    <div className='card outline outline-1'>
+      <div className='card-body'>
+        <div className='card-title'>{course.name}</div>
+        <p>{course.description}</p>
+        <div className='card-actions'>
+          <Button shape='circle' color='ghost'>
+            <Star />
+          </Button>
+
+          <NavLink to={`/courses/${course.id}`}>
+            {({ isPending, isTransitioning }) => (
+              <Button
+                color='ghost'
+                endIcon={<ArrowRight />}
+                loading={isPending || isTransitioning}>
+                {isPending || isTransitioning ? 'Loading...' : 'View course'}
+              </Button>
+            )}
+          </NavLink>
+        </div>
+      </div>
+    </div>
   );
 }

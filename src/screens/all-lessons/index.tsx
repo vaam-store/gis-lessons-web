@@ -4,7 +4,7 @@ import { useListCourses } from '@openapi/queries';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
-export default function AllSchools() {
+export function Component() {
   const [offset] = useState(0);
   const { data, error, isPending } = useListCourses({
     query: {

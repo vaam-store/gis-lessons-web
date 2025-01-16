@@ -6,7 +6,7 @@ export interface LessonSlideRenderWrapperProps {
   lessonId: string;
 }
 
-export default function LessonBlockRender({
+export function LessonBlockRender({
   lessonId,
 }: LessonSlideRenderWrapperProps) {
   return (

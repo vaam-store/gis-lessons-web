@@ -6,9 +6,9 @@
 @use 'reveal.js/dist/theme/night.css';
 @use 'highlight.js/scss/sunburst';
 
-article {
-  h1:first-child {
-    @apply text-3xl font-extrabold md:text-4xl lg:text-5xl xl:text-7xl;
+.big-title {
+  &:first-child {
+    @apply text-4xl font-extrabold md:text-5xl lg:text-5xl xl:text-7xl;
 
     span {
       @apply bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent;
@@ -16,6 +16,17 @@ article {
   }
 }
 
+article {
+  h1 {
+    @apply big-title;
+  }
+}
+
 .app-title {
   @apply mb-4 text-3xl font-bold md:mb-8 md:text-4xl;
 }
+
+main {
+  @apply grid grid-rows-[auto_1fr_auto] h-screen
+}
+

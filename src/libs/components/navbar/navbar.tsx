@@ -1,12 +1,11 @@
 import { LoginButton } from '@comp/auth';
 import { Container } from '@comp/container';
 import ThemeToggle from '@comp/theme';
-import { Button, Loading, Navbar } from 'react-daisyui';
+import { Navbar } from 'react-daisyui';
 import { NavLink } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
 import icon from '/icon.svg';
 
-export default function AppNavBar() {
+export function AppNavBar() {
   return (
     <div className='sticky top-0 z-40 mb-4 bg-base-300'>
       <Container className='py-0'>
@@ -21,20 +20,6 @@ export default function AppNavBar() {
           </Navbar.Start>
 
           <Navbar.End className='flex gap-4'>
-            <NavLink to='/school'>
-              {({ isPending, isActive }) =>
-                !isPending ? (
-                  <Button
-                    responsive
-                    type='button'
-                    className={twMerge([isActive && 'btn-secondary'])}>
-                    Lessons
-                  </Button>
-                ) : (
-                  <Loading />
-                )
-              }
-            </NavLink>
             <ThemeToggle />
             <LoginButton />
           </Navbar.End>

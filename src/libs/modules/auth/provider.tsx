@@ -1,3 +1,4 @@
+import { AsyncStorageImpl } from '@mod/auth/store.ts';
 import { getProjectEnvVariables } from '@mod/env';
 import { WebStorageStateStore } from 'oidc-client-ts';
 import type { PropsWithChildren } from 'react';
@@ -14,7 +15,7 @@ const onRemoveUser = (): void => {
 };
 
 const oidcConfig: AuthProviderProps = {
-  userStore: new WebStorageStateStore({ store: window.localStorage }),
+  userStore: new WebStorageStateStore({ store: new AsyncStorageImpl() }),
   authority: envVariables.VITE_OIDC_ISSUER,
   client_id: envVariables.VITE_OIDC_CLIENT_ID,
   client_secret: envVariables.VITE_OIDC_CLIENT_SECRET,

@@ -5,9 +5,11 @@ interface LessonCourseProps {
   block: LessonBlock;
 }
 
-export default function LessonCourse({ block: { data } }: LessonCourseProps) {
+export default function LessonCourse({
+  block: { content },
+}: LessonCourseProps) {
   return (
-    <MarkdownToHtmlWrapper content={data.content as string}>
+    <MarkdownToHtmlWrapper content={content}>
       {(html) => (
         <article
           className='prose prose-lg mx-auto mt-4 lg:prose-2xl md:mt-8'

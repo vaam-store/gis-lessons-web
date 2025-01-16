@@ -21,10 +21,10 @@ export interface DisplayProps {
   block: LessonBlock;
 }
 
-export default function LessonPresentation({ block: { data } }: DisplayProps) {
+export default function LessonPresentation({ block: { content } }: DisplayProps) {
   const deckDivRef = useRef<HTMLDivElement>(null); // reference to deck container div
   const deckRef = useRef<Reveal.Api | null>(null); // reference to deck reveal instance
-
+  
   useEffect(() => {
     // Prevents double initialization in strict mode
     if (deckRef.current) return;
@@ -67,7 +67,7 @@ export default function LessonPresentation({ block: { data } }: DisplayProps) {
         <div
           className='slides'
           dangerouslySetInnerHTML={{
-            __html: htmlContent(data.content as string),
+            __html: htmlContent(content),
           }}
         />
       </div>
