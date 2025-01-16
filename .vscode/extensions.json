@@ -12,7 +12,6 @@
     "firsttris.vscode-jest-runner",
     "ms-playwright.playwright",
     "donjayamanne.githistory",
-    "prisma.prisma",
     "github.vscode-github-actions"
   ]
 }

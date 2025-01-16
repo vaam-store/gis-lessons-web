@@ -1,34 +1,35 @@
-import '@fontsource/roboto/400.css';
 import '@mod/tracing';
 import './index.scss';
 
-import { i18nFn } from '@mod/i18n';
+import DefaultHead from '@comp/helmet';
+import { AuthProvider, SilentLogin } from '@mod/auth';
+import AppI18nProvider from '@mod/i18n';
 import Notification from '@mod/notification';
 import QueryWrapper from '@mod/query';
-import { router } from '@mod/router';
+import RouterProvider from '@mod/router';
 import Versioning from '@mod/versioning';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Helmet } from 'react-helmet';
-import { I18nextProvider } from 'react-i18next';
-import { RouterProvider } from 'react-router-dom';
 
-async function main() {
-  const i18n = await i18nFn();
-
+function main() {
   const container = document.getElementById('root')!;
-  createRoot(container).render(
+  const root = createRoot(container);
+
+  root.render(
     <StrictMode>
-      <I18nextProvider i18n={i18n}>
-        <QueryWrapper>
-          <Versioning />
-          <Helmet titleTemplate='%s | GIS Lessons' defaultTitle='GIS Lessons' />
-          <RouterProvider router={router} />
-          <Notification />
-        </QueryWrapper>
-      </I18nextProvider>
+      <AppI18nProvider>
+        <AuthProvider>
+          <QueryWrapper>
+            <SilentLogin />
+            <Versioning />
+            <DefaultHead />
+            <RouterProvider />
+            <Notification />
+          </QueryWrapper>
+        </AuthProvider>
+      </AppI18nProvider>
     </StrictMode>,
   );
 }
 
-main().catch(console.error);
+main();

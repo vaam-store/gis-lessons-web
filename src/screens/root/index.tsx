@@ -1,8 +1,9 @@
-import { GlobalSpinner } from '@comp/global-spinner.tsx';
-import AppNavBar from '@comp/root/navbar.tsx';
+import AppFooter from '@comp/footer';
+import GlobalSpinner from '@comp/global-spinner';
+import { AppNavBar } from '@comp/navbar';
 import { Outlet, useNavigation } from 'react-router-dom';
 
-export default function RootScreen() {
+export function Component() {
   const navigation = useNavigation();
   const isNavigating = Boolean(navigation.location);
 
@@ -11,6 +12,7 @@ export default function RootScreen() {
       <AppNavBar />
       {isNavigating && <GlobalSpinner />}
       <Outlet />
+      <AppFooter />
     </main>
   );
 }

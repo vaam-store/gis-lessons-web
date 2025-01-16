@@ -1,9 +1,18 @@
+import { Container } from '@comp/container';
 import { SchoolList } from '@comp/school-list';
-import { useGetLessonMap } from '@openapi/queries';
+import { useListCourses } from '@openapi/queries';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
-export default function AllSchools() {
-  const { data, error, isPending } = useGetLessonMap();
+export function Component() {
+  const [offset] = useState(0);
+  const { data, error, isPending } = useListCourses({
+    query: {
+      limit: 10,
+      offset,
+    },
+  });
+
   if (isPending) {
     return <div>Loading...</div>;
   }
@@ -13,14 +22,14 @@ export default function AllSchools() {
   }
 
   return (
-    <div className='container mx-auto px-4'>
+    <Container>
       <Helmet>
         <title>All school!</title>
       </Helmet>
 
-      <h1 className='mb-4 text-4xl font-extrabold md:mb-8'>All Schools</h1>
+      <h1 className='app-title'>All Schools</h1>
 
       <SchoolList data={data!} />
-    </div>
+    </Container>
   );
 }

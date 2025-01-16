@@ -1,0 +1,93 @@
+{
+  "id": "gis",
+  "realm": "gis",
+  "displayName": "GIS Lessons",
+  "displayNameHtml": "<b>GIS</b> Lessons",
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "enabled": true,
+  "rememberMe": true,
+  "verifyEmail": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "clients": [
+    {
+      "clientId": "gis-lessons-web",
+      "name": "GIS Lessons Web",
+      "description": "",
+      "rootUrl": "http://localhost:5173",
+      "adminUrl": "http://localhost:5173/admin",
+      "baseUrl": "/",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "redirectUris": ["/*"],
+      "webOrigins": ["+"],
+      "consentRequired": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": true,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "realm_client": "false",
+        "oidc.ciba.grant.enabled": "false",
+        "backchannel.logout.session.required": "true",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "fullScopeAllowed": true
+    }
+  ],
+  "eventsEnabled": false,
+  "loginTheme": "ssegning-tw-01",
+  "internationalizationEnabled": true,
+  "supportedLocales": ["en", "fr"],
+  "defaultLocale": "en",
+  "identityProviders": [
+    {
+      "alias": "facebook",
+      "displayName": "Facebook",
+      "providerId": "facebook",
+      "enabled": true,
+      "config": {
+        "syncMode": "LEGACY",
+        "clientSecret": "fake-secret",
+        "clientId": "fake-client-id"
+      }
+    },
+    {
+      "alias": "google",
+      "displayName": "Google",
+      "providerId": "google",
+      "enabled": true,
+      "config": {
+        "syncMode": "LEGACY",
+        "clientSecret": "fake-secret",
+        "clientId": "fake-client-id"
+      }
+    }
+  ],
+  "users": [
+    {
+      "email": "${KEYCLOAK_ADMIN}@admin",
+      "username": "${KEYCLOAK_ADMIN}",
+      "firstName": "DevOps",
+      "lastName": "SRE",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "temporary": false,
+          "type": "password",
+          "value": "${KEYCLOAK_ADMIN_PASSWORD}"
+        }
+      ]
+    }
+  ]
+}

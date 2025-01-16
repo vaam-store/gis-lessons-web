@@ -5,4 +5,4 @@ export const createStore = (dbName: string) => (storeName: string) => {
   return cs(name, name);
 };
 
-export const baseStore = createStore('sma_app');
+export const baseStore = createStore('gis_lesson_app');

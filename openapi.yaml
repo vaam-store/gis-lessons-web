@@ -1,132 +1,1662 @@
 openapi: 3.0.3
 info:
-  title: Lesson OpenApi
+  title: GIS Learn V2 OpenApi
   description: |
-    Lesson management app using CBOR as PoC. More at [https://lesson.vymalo.com](https://lesson.vymalo.com)
-  termsOfService: https://lesson.vymalo.com/res/tos
+    LMS app. More at [https://sschool.app](https://sschool.app)
+  termsOfService: https://sschool.app/res/tos
   contact:
-    email: lesson@vymalo.com
-    name: Vymalo Lesson Team
+    email: learn@sschool.app
+    name: GIS Learn V2 Team
   license:
     name: MIT
   version: 0.1.0
 externalDocs:
   description: |
-    Find out more about Managing your Lesson from afar. Let's meet on 
+    Find out more about Managing your Course from afar. Let's meet on 
     our website 😉.
   url: https://blog.ssegning.com
-servers: []
-tags:
-  - name: lesson
-    description: All about managing lesson
-paths:
-  /api/lessons/{slug_name}/slides.md:
-    get:
-      tags:
-        - lesson
-      summary: Get lesson slides
-      description: |
-        This is to get a single Markdown
-      operationId: getLessonSlide
-      parameters:
-        - name: slug_name
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'successful operation'
-          content:
-            text/markdown:
-              schema:
-                type: string
-        400:
-          description: 'wrong content provided'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: 'Internal server'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+servers:
+  - url: 'https://api.sschool.app'
+    description: Production server
+  - url: 'http://localhost:3000'
+    description: Development server
+  - url: '{scheme}://{host}:{port}'
+    description: Custom server
+    variables:
+      scheme:
+        enum:
+          - http
+          - https
+        default: http
+      host:
+        default: localhost
+      port:
+        default: '3000'
 
-  /api/lessons/map.json:
+tags:
+  - name: Courses
+    description: All about managing course
+paths:
+  ##########################################################################
+  # STUDENTS
+  ##########################################################################
+  /api/students:
     get:
+      summary: List all students
+      operationId: listStudents
       tags:
-        - lesson
-      summary: Get lessons map
-      operationId: getLessonMap
+        - Students
+      security:
+        - bearerAuth:
+            - read:students
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
       responses:
-        200:
-          description: 'successful operation'
+        '200':
+          description: A list of students
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageStudent'
+    post:
+      summary: Create a new student
+      operationId: createStudent
+      tags:
+        - Students
+      security:
+        - bearerAuth:
+            - write:students
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentCreate'
+      responses:
+        '201':
+          description: Student created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+  /api/students/{studentId}:
+    get:
+      summary: Retrieve a single student
+      operationId: getStudent
+      tags:
+        - Students
+      security:
+        - bearerAuth:
+            - read:students
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      responses:
+        '200':
+          description: The requested student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Student not found
+    put:
+      summary: Update a student
+      operationId: updateStudent
+      tags:
+        - Students
+      security:
+        - bearerAuth:
+            - write:students
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentUpdate'
+      responses:
+        '200':
+          description: Student updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Student not found
+    delete:
+      summary: Delete a student
+      operationId: deleteStudent
+      tags:
+        - Students
+      security:
+        - bearerAuth:
+            - write:students
+      parameters:
+        - $ref: '#/components/parameters/studentId'
+      responses:
+        '204':
+          description: Student deleted successfully
+        '404':
+          description: Student not found
+
+  ##########################################################################
+  # INSTRUCTORS
+  ##########################################################################
+  /api/instructors:
+    get:
+      summary: List all instructors
+      operationId: listInstructors
+      tags:
+        - Instructors
+      security:
+        - bearerAuth:
+            - read:instructors
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of instructors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageInstructor'
+    post:
+      summary: Create a new instructor
+      operationId: createInstructor
+      tags:
+        - Instructors
+      security:
+        - bearerAuth:
+            - write:instructors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorCreate'
+      responses:
+        '201':
+          description: Instructor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instructor'
+  /api/instructors/{instructorId}:
+    get:
+      summary: Retrieve a single instructor
+      operationId: getInstructor
+      tags:
+        - Instructors
+      security:
+        - bearerAuth:
+            - read:instructors
+      parameters:
+        - $ref: '#/components/parameters/instructorId'
+      responses:
+        '200':
+          description: The requested instructor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instructor'
+        '404':
+          description: Instructor not found
+    put:
+      summary: Update an instructor
+      operationId: updateInstructor
+      tags:
+        - Instructors
+      security:
+        - bearerAuth:
+            - write:instructors
+      parameters:
+        - $ref: '#/components/parameters/instructorId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstructorUpdate'
+      responses:
+        '200':
+          description: Instructor updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instructor'
+        '404':
+          description: Instructor not found
+    delete:
+      summary: Delete an instructor
+      operationId: deleteInstructor
+      tags:
+        - Instructors
+      security:
+        - bearerAuth:
+            - write:instructors
+      parameters:
+        - $ref: '#/components/parameters/instructorId'
+      responses:
+        '204':
+          description: Instructor deleted successfully
+        '404':
+          description: Instructor not found
+
+  ##########################################################################
+  # COURSES
+  ##########################################################################
+  /api/courses:
+    get:
+      summary: List all courses
+      operationId: listCourses
+      tags:
+        - Courses
+      security:
+        - bearerAuth:
+            - read:courses
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageCourse'
+    post:
+      summary: Create a new course
+      operationId: createCourse
+      tags:
+        - Courses
+      security:
+        - bearerAuth:
+            - write:courses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseCreate'
+      responses:
+        '201':
+          description: Course created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+  /api/courses/{courseId}:
+    get:
+      summary: Retrieve a single course
+      operationId: getCourse
+      tags:
+        - Courses
+      security:
+        - bearerAuth:
+            - read:courses
+      parameters:
+        - $ref: '#/components/parameters/courseId'
+      responses:
+        '200':
+          description: The requested course
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '404':
+          description: Course not found
+    put:
+      summary: Update a course
+      operationId: updateCourse
+      tags:
+        - Courses
+      security:
+        - bearerAuth:
+            - write:courses
+      parameters:
+        - $ref: '#/components/parameters/courseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseUpdate'
+      responses:
+        '200':
+          description: Course updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '404':
+          description: Course not found
+    delete:
+      summary: Delete a course
+      operationId: deleteCourse
+      tags:
+        - Courses
+      security:
+        - bearerAuth:
+            - write:courses
+      parameters:
+        - $ref: '#/components/parameters/courseId'
+      responses:
+        '204':
+          description: Course deleted successfully
+        '404':
+          description: Course not found
+
+  ##########################################################################
+  # ENROLLMENTS
+  ##########################################################################
+  /api/enrollments:
+    get:
+      summary: List all enrollments
+      operationId: listEnrollments
+      tags:
+        - Enrollments
+      security:
+        - bearerAuth:
+            - read:enrollments
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of enrollments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEnrollment'
+    post:
+      summary: Create a new enrollment
+      operationId: createEnrollment
+      tags:
+        - Enrollments
+      security:
+        - bearerAuth:
+            - write:enrollments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentCreate'
+      responses:
+        '201':
+          description: Enrollment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enrollment'
+  /api/enrollments/{enrollmentId}:
+    get:
+      summary: Retrieve a single enrollment
+      operationId: getEnrollment
+      tags:
+        - Enrollments
+      security:
+        - bearerAuth:
+            - read:enrollments
+      parameters:
+        - $ref: '#/components/parameters/enrollmentId'
+      responses:
+        '200':
+          description: The requested enrollment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enrollment'
+        '404':
+          description: Enrollment not found
+    put:
+      summary: Update an enrollment
+      operationId: updateEnrollment
+      tags:
+        - Enrollments
+      security:
+        - bearerAuth:
+            - write:enrollments
+      parameters:
+        - $ref: '#/components/parameters/enrollmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentUpdate'
+      responses:
+        '200':
+          description: Enrollment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enrollment'
+        '404':
+          description: Enrollment not found
+    delete:
+      summary: Delete an enrollment
+      operationId: deleteEnrollment
+      tags:
+        - Enrollments
+      security:
+        - bearerAuth:
+            - write:enrollments
+      parameters:
+        - $ref: '#/components/parameters/enrollmentId'
+      responses:
+        '204':
+          description: Enrollment deleted successfully
+        '404':
+          description: Enrollment not found
+
+  ##########################################################################
+  # MODULES
+  ##########################################################################
+  /api/modules:
+    get:
+      summary: List all modules
+      operationId: listModules
+      tags:
+        - Modules
+      security:
+        - bearerAuth:
+            - read:modules
+      parameters:
+        - name: courseId
+          in: query
+          required: true
+          description: The ID of the course to retrieve
+          schema:
+            $ref: '#/components/schemas/Cuid'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of modules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageModule'
+    post:
+      summary: Create a new module
+      operationId: createModule
+      tags:
+        - Modules
+      security:
+        - bearerAuth:
+            - write:modules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleCreate'
+      responses:
+        '201':
+          description: Module created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+  /api/modules/{moduleId}:
+    get:
+      summary: Retrieve a single module
+      operationId: getModule
+      tags:
+        - Modules
+      security:
+        - bearerAuth:
+            - read:modules
+      parameters:
+        - $ref: '#/components/parameters/moduleId'
+      responses:
+        '200':
+          description: The requested module
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        '404':
+          description: Module not found
+    put:
+      summary: Update a module
+      operationId: updateModule
+      tags:
+        - Modules
+      security:
+        - bearerAuth:
+            - write:modules
+      parameters:
+        - $ref: '#/components/parameters/moduleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModuleUpdate'
+      responses:
+        '200':
+          description: Module updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        '404':
+          description: Module not found
+    delete:
+      summary: Delete a module
+      operationId: deleteModule
+      tags:
+        - Modules
+      security:
+        - bearerAuth:
+            - write:modules
+      parameters:
+        - $ref: '#/components/parameters/moduleId'
+      responses:
+        '204':
+          description: Module deleted successfully
+        '404':
+          description: Module not found
+
+  ##########################################################################
+  # LESSONS
+  ##########################################################################
+  /api/lessons:
+    get:
+      summary: List all Lessons
+      operationId: listLesson
+      tags:
+        - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
+      parameters:
+        - name: courseId
+          in: query
+          required: true
+          description: The ID of the course to retrieve
+          schema:
+            $ref: '#/components/schemas/Cuid'
+        - name: moduleId
+          in: query
+          required: true
+          description: The ID of the module to retrieve
+          schema:
+            $ref: '#/components/schemas/Cuid'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of Lessons
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageLesson'
+    post:
+      summary: Create a new Lesson
+      operationId: createLesson
+      tags:
+        - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonCreate'
+      responses:
+        '201':
+          description: Lesson created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+  /api/lessons/{lessonId}/blocks:
+    get:
+      summary: Retrieve a single Lesson
+      operationId: getLessonBlocks
+      tags:
+        - Lessons
+      security:
+        - bearerAuth:
+            - read:lessons
+      parameters:
+        - $ref: '#/components/parameters/lessonId'
+      responses:
+        '200':
+          description: The requested Lesson's block
           content:
             application/json:
               schema:
                 type: object
                 additionalProperties:
-                  type: object
-                  properties:
-                    title:
-                      type: string
-        400:
-          description: 'wrong content provided'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: 'Internal server'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /api/lessons/{slug_name}/course.md:
+                  $ref: '#/components/schemas/LessonBlock'
+        '404':
+          description: Lesson not found
+  /api/lessons/{lessonId}:
     get:
+      summary: Retrieve a single Lesson
+      operationId: getLesson
       tags:
-        - lesson
-      summary: Get lesson course
-      description: |
-        This is to get a single Markdown
-      operationId: getLessonCourse
+        - Lessons
+      security:
+        - bearerAuth:
+            - read:lessons
       parameters:
-        - name: slug_name
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/lessonId'
       responses:
-        200:
-          description: 'successful operation'
-          content:
-            text/markdown:
-              schema:
-                type: string
-        400:
-          description: 'wrong content provided'
+        '200':
+          description: The requested Lesson
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: 'Internal server'
+                $ref: '#/components/schemas/Lesson'
+        '404':
+          description: Lesson not found
+    put:
+      summary: Update a Lesson
+      operationId: updateLesson
+      tags:
+        - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
+      parameters:
+        - $ref: '#/components/parameters/lessonId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonUpdate'
+      responses:
+        '200':
+          description: Lesson updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Module'
+        '404':
+          description: Lesson not found
+    delete:
+      summary: Delete a Lesson
+      operationId: deleteLesson
+      tags:
+        - Lessons
+      security:
+        - bearerAuth:
+            - write:lessons
+      parameters:
+        - $ref: '#/components/parameters/lessonId'
+      responses:
+        '204':
+          description: Lesson deleted successfully
+        '404':
+          description: Lesson not found
+
+  ##########################################################################
+  # ASSIGNMENTS
+  ##########################################################################
+  /api/assignments:
+    get:
+      summary: List all assignments
+      operationId: listAssignments
+      tags:
+        - Assignments
+      security:
+        - bearerAuth:
+            - read:assignments
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of assignments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageAssignment'
+    post:
+      summary: Create a new assignment
+      operationId: createAssignment
+      tags:
+        - Assignments
+      security:
+        - bearerAuth:
+            - write:assignments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignmentCreate'
+      responses:
+        '201':
+          description: Assignment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+  /api/assignments/{assignmentId}:
+    get:
+      summary: Retrieve a single assignment
+      operationId: getAssignment
+      tags:
+        - Assignments
+      security:
+        - bearerAuth:
+            - read:assignments
+      parameters:
+        - $ref: '#/components/parameters/assignmentId'
+      responses:
+        '200':
+          description: The requested assignment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+        '404':
+          description: Assignment not found
+    put:
+      summary: Update an assignment
+      operationId: updateAssignment
+      tags:
+        - Assignments
+      security:
+        - bearerAuth:
+            - write:assignments
+      parameters:
+        - $ref: '#/components/parameters/assignmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignmentUpdate'
+      responses:
+        '200':
+          description: Assignment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assignment'
+        '404':
+          description: Assignment not found
+    delete:
+      summary: Delete an assignment
+      operationId: deleteAssignment
+      tags:
+        - Assignments
+      security:
+        - bearerAuth:
+            - write:assignments
+      parameters:
+        - $ref: '#/components/parameters/assignmentId'
+      responses:
+        '204':
+          description: Assignment deleted successfully
+        '404':
+          description: Assignment not found
+
+  ##########################################################################
+  # SUBMISSIONS
+  ##########################################################################
+  /api/submissions:
+    get:
+      summary: List all submissions
+      operationId: listSubmissions
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - read:submissions
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of submissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageSubmission'
+    post:
+      summary: Create a new submission
+      operationId: createSubmission
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionCreate'
+      responses:
+        '201':
+          description: Submission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+  /api/submissions/{submissionId}:
+    get:
+      summary: Retrieve a single submission
+      operationId: getSubmission
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - read:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+      responses:
+        '200':
+          description: The requested submission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404':
+          description: Submission not found
+    put:
+      summary: Update a submission
+      operationId: updateSubmission
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionUpdate'
+      responses:
+        '200':
+          description: Submission updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+        '404':
+          description: Submission not found
+    delete:
+      summary: Delete a submission
+      operationId: deleteSubmission
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+      responses:
+        '204':
+          description: Submission deleted successfully
+        '404':
+          description: Submission not found
+  /api/activities:
+    get:
+      summary: List all submission activities
+      operationId: getSubmissionActivities
+      tags:
+        - Activities
+      security:
+        - bearerAuth:
+            - read:activities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: The requested submission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageActivity'
+        '404':
+          description: Activity not found
+
+
+  ##########################################################################
+  # SUBMISSIONS
+  ##########################################################################
+  /api/comments:
+    get:
+      summary: List all comments
+      operationId: listComments
+      tags:
+        - Comments
+      security:
+        - bearerAuth:
+            - read:comments
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
+      responses:
+        '200':
+          description: A list of Comments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageComment'
+    post:
+      summary: Create a new comment
+      operationId: createComment
+      tags:
+        - Comments
+      security:
+        - bearerAuth:
+            - write:comments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreate'
+      responses:
+        '201':
+          description: Submission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+  /api/comments/{commentId}:
+    get:
+      summary: Retrieve a single Comment
+      operationId: getComment
+      tags:
+        - Comments
+      security:
+        - bearerAuth:
+            - read:comments
+      parameters:
+        - $ref: '#/components/parameters/commentId'
+      responses:
+        '200':
+          description: The requested Comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: Comment not found
+
 components:
+  parameters:
+    studentId:
+      name: studentId
+      in: path
+      required: true
+      description: The ID of the student to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    instructorId:
+      name: instructorId
+      in: path
+      required: true
+      description: The ID of the instructor to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    courseId:
+      name: courseId
+      in: path
+      required: true
+      description: The ID of the course to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    enrollmentId:
+      name: enrollmentId
+      in: path
+      required: true
+      description: The ID of the enrollment to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    moduleId:
+      name: moduleId
+      in: path
+      required: true
+      description: The ID of the module to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    lessonId:
+      name: lessonId
+      in: path
+      required: true
+      description: The ID of the lesson to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    assignmentId:
+      name: assignmentId
+      in: path
+      required: true
+      description: The ID of the assignment to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    submissionId:
+      name: submissionId
+      in: path
+      required: true
+      description: The ID of the submission to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    commentId:
+      name: commentId
+      in: path
+      required: true
+      description: The ID of the comment to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    activityId:
+      name: activityId
+      in: path
+      required: true
+      description: The ID of the activity to retrieve
+      schema:
+        $ref: '#/components/schemas/Cuid'
+    limit:
+      name: limit
+      in: query
+      description: Number of items to return
+      required: false
+      schema:
+        type: integer
+        format: int64
+        default: 10
+    offset:
+      name: offset
+      in: query
+      description: The number of items to skip before starting to collect the result set
+      required: false
+      schema:
+        type: integer
+        format: int64
+        default: 0
+    search_query:
+      name: q
+      in: query
+      description: The search query
+      required: false
+      schema:
+        type: string
+  ##########################################################################
+  # SCHEMAS (Data Models)
+  ##########################################################################
   schemas:
-    Error:
+    Cuid:
+      type: string
+      format: cuid
+    DateTime:
+      type: string
+      format: date-time
+    Model:
+      allOf:
+        - $ref: '#/components/schemas/WithMeta'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              $ref: '#/components/schemas/Cuid'
+            created_at:
+              $ref: '#/components/schemas/DateTime'
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
+    Meta:
+      type: object
+      additionalProperties: true
+      default: { }
+    WithMeta:
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+    
+    #-------------------------------------------------------
+    # STUDENT
+    #-------------------------------------------------------
+    CoreStudent:
       type: object
       properties:
-        message:
-          type: string
-        code:
-          type: number
+        user_id:
+          $ref: '#/components/schemas/Cuid'
       required:
-        - message
-        - code
-  securitySchemes: {}
+        - user_id
+    Student:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreStudent'
+    StudentCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreStudent'
+        - $ref: '#/components/schemas/WithMeta'
+    StudentUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreStudent'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # INSTRUCTOR
+    #-------------------------------------------------------
+    CoreInstructor:
+      type: object
+      properties:
+        user_id:
+          $ref: '#/components/schemas/Cuid'
+      required:
+        - user_id
+    Instructor:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreInstructor'
+    InstructorCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreInstructor'
+        - $ref: '#/components/schemas/WithMeta'
+    InstructorUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreInstructor'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # COURSE
+    #-------------------------------------------------------
+    CoreCourse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Introduction to Programming
+        slug:
+          type: string
+        description:
+          type: string
+          example: Basic programming concepts using Python
+        longDescription:
+          type: string
+          example: |
+            This course introduces students to the basic concepts of programming.
+            It covers variables, data types, and basic operations.
+            We will use Python as the programming language.
+      required:
+        - name
+        - slug
+    Course:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreCourse'
+    CourseCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreCourse'
+        - $ref: '#/components/schemas/WithMeta'
+    CourseUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreCourse'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # ENROLLMENT
+    #-------------------------------------------------------
+    CoreEnrollment:
+      type: object
+      properties:
+        student_id:
+          $ref: '#/components/schemas/Cuid'
+        course_id:
+          $ref: '#/components/schemas/Cuid'
+        enrollment_date:
+          $ref: '#/components/schemas/DateTime'
+      required:
+        - student_id
+        - course_id
+        - enrollment_date
+    Enrollment:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreEnrollment'
+    EnrollmentCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreEnrollment'
+        - $ref: '#/components/schemas/WithMeta'
+    EnrollmentUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreEnrollment'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # MODULE
+    #-------------------------------------------------------
+    CoreModule:
+      type: object
+      properties:
+        course_id:
+          $ref: '#/components/schemas/Cuid'
+        title:
+          type: string
+          example: Variables and Data Types
+        description:
+          type: string
+          example: Introduction to fundamental programming concepts
+        longDescription:
+          type: string
+          example: |
+            This module introduces students to the basic concepts of programming.
+            It covers variables, data types, and basic operations.
+    Module:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreModule'
+    ModuleCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreModule'
+        - $ref: '#/components/schemas/WithMeta'
+    ModuleUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreModule'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # LESSON
+    #-------------------------------------------------------
+    CoreLesson:
+      type: object
+      properties:
+        module_id:
+          $ref: '#/components/schemas/Cuid'
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - module_id
+        - title
+    CoreLessonBlock:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - slide
+            - content
+        content:
+          type: string
+          example: |
+            This is a slide content
+            ---
+            This is another slide content
+            ---
+            This is a content block
+            ------
+            This is another content block
+            ---
+            This is a slide content
+      required:
+        - type
+        - data
+        - content
+    LessonBlock:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreLessonBlock'
+    Lesson:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreLesson'
+    LessonCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreLesson'
+        - $ref: '#/components/schemas/WithMeta'
+        - type: object
+          required:
+            - blocks
+          properties:
+            blocks:
+              additionalProperties:
+                $ref: '#/components/schemas/CoreLessonBlock'
+    LessonUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreLesson'
+        - $ref: '#/components/schemas/WithMeta'
+        - type: object
+          required:
+            - blocks
+          properties:
+            blocks:
+              additionalProperties:
+                $ref: '#/components/schemas/CoreLessonBlock'
+
+    #-------------------------------------------------------
+    # ASSIGNMENT
+    #-------------------------------------------------------
+    CoreAssignment:
+      type: object
+      required:
+        - module_id
+        - instructor_id
+        - title
+        - due_date
+      properties:
+        module_id:
+          $ref: '#/components/schemas/Cuid'
+        instructor_id:
+          $ref: '#/components/schemas/Cuid'
+        title:
+          type: string
+          example: Homework #1
+        description:
+          type: string
+          example: Solve basic programming exercises
+        due_date:
+          $ref: '#/components/schemas/DateTime'
+    Assignment:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreAssignment'
+    AssignmentCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreAssignment'
+        - $ref: '#/components/schemas/WithMeta'
+    AssignmentUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreAssignment'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # SUBMISSION
+    #-------------------------------------------------------
+    CoreSubmission:
+      type: object
+      properties:
+        assignment_id:
+          $ref: '#/components/schemas/Cuid'
+        student_id:
+          $ref: '#/components/schemas/Cuid'
+        date_submitted:
+          $ref: '#/components/schemas/DateTime'
+        content:
+          type: string
+          example: "print('Hello World')"
+    Submission:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreSubmission'
+    SubmissionCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreSubmission'
+        - $ref: '#/components/schemas/WithMeta'
+    SubmissionUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreSubmission'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # ACTIVITY
+    #-------------------------------------------------------
+    ActivityType:
+      type: string
+      enum:
+        - create
+        - delete
+        - update
+    ActivityEntityType:
+      type: string
+      enum:
+        - student
+        - instructor
+        - course
+        - enrollment
+        - module
+        - assignment
+        - submission
+        - activity
+        - comment
+    CoreActivity:
+      type: object
+      properties:
+        user_id:
+          $ref: '#/components/schemas/Cuid'
+        entity_id:
+          $ref: '#/components/schemas/Cuid'
+        entity_type:
+          $ref: '#/components/schemas/ActivityEntityType'
+        content:
+          type: string
+        action_type:
+          $ref: '#/components/schemas/ActivityType'
+      required:
+        - user_id
+        - entity_id
+        - entity_type
+        - content
+        - action_type
+    Activity:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreActivity'
+
+    #-------------------------------------------------------
+    # COMMENT
+    #-------------------------------------------------------
+    CoreComment:
+      type: object
+      properties:
+        user_id:
+          $ref: '#/components/schemas/Cuid'
+        owner_id:
+          $ref: '#/components/schemas/Cuid'
+        content:
+          type: string
+        type:
+          type: string
+          enum:
+            - submission
+            - assignment
+            - module
+            - course
+    Comment:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreComment'
+    CommentCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreComment'
+        - $ref: '#/components/schemas/WithMeta'
+
+    #-------------------------------------------------------
+    # PAGINATION
+    #-------------------------------------------------------
+    CorePage:
+      type: object
+      required:
+        - meta
+      properties:
+        meta:
+          type: object
+          required:
+            - limit
+            - offset
+            - total
+          properties:
+            limit:
+              type: integer
+              format: int64
+            offset:
+              type: integer
+              format: int64
+            total:
+              type: integer
+              format: int64
+    PageStudent:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Student'
+    PageInstructor:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Instructor'
+    PageCourse:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Course'
+    PageEnrollment:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Enrollment'
+    PageModule:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Module'
+    PageAssignment:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Assignment'
+    PageSubmission:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Submission'
+    PageActivity:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Activity'
+    PageComment:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Comment'
+    PageLesson:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              minItems: 10
+              items:
+                $ref: '#/components/schemas/Lesson'
+
+  securitySchemes:
+    bearerAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://slack.com/oauth/authorize
+          tokenUrl: https://slack.com/api/oauth.access
+          scopes:
+            read:courses: Some permission
+            write:courses: Some permission
+            read:lessons: Some permission
+            write:lessons: Some permission
+            read:assignments: Some permission
+            write:assignments: Some permission
+            read:submissions: Some permission
+            write:submissions: Some permission
+            read:comments: Some permission
+            write:comments: Some permission
+            read:activities: Some permission
+            write:activities: Some permission
+            read:modules: Some permission
+            write:modules: Some permission
+            read:enrollments: Some permission
+            write:enrollments: Some permission
+            read:students: Some permission
+            write:students: Some permission
+            read:instructors: Some permission
+            write:instructors: Some permission
+            read:users: Some permission
+            write:users: Some permission 
+    

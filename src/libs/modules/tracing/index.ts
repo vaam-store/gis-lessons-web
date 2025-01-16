@@ -26,8 +26,7 @@ const provider = new WebTracerProvider({
     // Export traces to Tempo (OTLP)
     new SimpleSpanProcessor(
       new OTLPTraceExporter({
-        url:
-          window.location.protocol + '//' + window.location.host + '/misc/tp',
+        url: window.location.origin + '/misc/tp',
       }),
     ),
     new SimpleSpanProcessor(new ConsoleSpanExporter()),

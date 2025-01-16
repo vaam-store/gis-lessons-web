@@ -16,6 +16,7 @@ theme:
 nav:
   - Home: README.md
   - Storybook: storybook
+  - Coverage: coverage
 
 # Extra settings
 markdown_extensions:

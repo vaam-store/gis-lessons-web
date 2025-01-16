@@ -1,6 +1,7 @@
 import { webUpdateNotice } from '@plugin-web-update-notification/vite';
 import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
+import basex from 'base-x';
 import { Buffer } from 'buffer';
 import { defineConfig } from 'vite';
 import bundlesize from 'vite-plugin-bundlesize';
@@ -9,8 +10,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { robots } from 'vite-plugin-robots';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-const base64Encode = (plaintext: string): string => {
-  return Buffer.from(plaintext).toString('base64');
+const baseEncode = (plaintext: string): string => {
+  const base =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-'._~!$&()*+,;=:@";
+  const converter = basex(base);
+  return converter.encode(Buffer.from(plaintext));
 };
 
 // https://vite.dev/config/
@@ -21,7 +25,7 @@ export default defineConfig({
       limits: [
         {
           name: '**/*.js',
-          limit: 300_000, // 250.0KB
+          limit: 500_000,
         },
       ],
     }),
@@ -29,6 +33,7 @@ export default defineConfig({
     ViteMinifyPlugin({}),
     legacy({
       targets: ['defaults'],
+      modernPolyfills: true,
     }),
     robots(),
     webUpdateNotice({
@@ -40,12 +45,40 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       manifest: {
-        name: 'Frontend App Test',
-        short_name: 'Frontend',
+        name: 'GIS Lessons',
+        short_name: 'GISchool',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
+        icons: [
+          {
+            src: 'images/pwa-32x32.png',
+            sizes: '32x32',
+            type: 'image/png',
+          },
+          {
+            src: 'images/pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
+          },
+          {
+            src: 'images/pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'images/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'images/maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 5_000_000,
@@ -54,6 +87,10 @@ export default defineConfig({
   ],
   server: {
     proxy: {
+      '/rest': {
+        target: 'http://localhost:4010',
+        rewrite: (path) => path.replace('/rest', '/'),
+      },
       '/misc/tp': {
         target: 'http://localhost:4318',
         rewrite: (path) => path.replace('/misc/tp', '/v1/traces'),
@@ -76,7 +113,7 @@ export default defineConfig({
               .split('node_modules/')[1]
               .split('/')[0]
               .toString();
-            return cleanName + '-' + base64Encode(cleanName);
+            return baseEncode(cleanName);
           }
         },
         chunkFileNames: 'assets/chunks/[name]-[hash].js',

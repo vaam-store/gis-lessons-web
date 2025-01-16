@@ -29,8 +29,8 @@ export default function ThemeToggle({ responsive = true }: ThemeToggleProps) {
 
   return (
     <Button
-      size='sm'
       shape='circle'
+      variant='outline'
       responsive={responsive}
       data-set-theme={nextTheme}
       onClick={onChange}
