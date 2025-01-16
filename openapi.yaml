@@ -582,7 +582,7 @@ paths:
           schema:
             $ref: '#/components/schemas/Cuid'
         - name: moduleId
-          in: path
+          in: query
           required: true
           description: The ID of the module to retrieve
           schema:
@@ -1591,28 +1591,34 @@ components:
               items:
                 $ref: '#/components/schemas/Lesson'
 
-security:
-  - bearerAuth:
-      - read:courses
-      - write:courses
-      - read:lessons
-      - write:lessons
-      - read:assignments
-      - write:assignments
-      - read:submissions
-      - write:submissions
-      - read:comments
-      - write:comments
-      - read:activities
-      - write:activities
-      - read:modules
-      - write:modules
-      - read:enrollments
-      - write:enrollments
-      - read:students
-      - write:students
-      - read:instructors
-      - write:instructors
-      - read:users
-      - write:users
+  securitySchemes:
+    bearerAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://slack.com/oauth/authorize
+          tokenUrl: https://slack.com/api/oauth.access
+          scopes:
+            read:courses: Some permission
+            write:courses: Some permission
+            read:lessons: Some permission
+            write:lessons: Some permission
+            read:assignments: Some permission
+            write:assignments: Some permission
+            read:submissions: Some permission
+            write:submissions: Some permission
+            read:comments: Some permission
+            write:comments: Some permission
+            read:activities: Some permission
+            write:activities: Some permission
+            read:modules: Some permission
+            write:modules: Some permission
+            read:enrollments: Some permission
+            write:enrollments: Some permission
+            read:students: Some permission
+            write:students: Some permission
+            read:instructors: Some permission
+            write:instructors: Some permission
+            read:users: Some permission
+            write:users: Some permission 
     
