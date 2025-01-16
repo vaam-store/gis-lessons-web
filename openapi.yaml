@@ -23,7 +23,7 @@ paths:
   ##########################################################################
   # STUDENTS
   ##########################################################################
-  /students:
+  /api/students:
     get:
       summary: List all students
       operationId: listStudents
@@ -58,7 +58,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Student'
-  /students/{studentId}:
+  /api/students/{studentId}:
     get:
       summary: Retrieve a single student
       operationId: getStudent
@@ -113,7 +113,7 @@ paths:
   ##########################################################################
   # INSTRUCTORS
   ##########################################################################
-  /instructors:
+  /api/instructors:
     get:
       summary: List all instructors
       operationId: listInstructors
@@ -148,7 +148,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Instructor'
-  /instructors/{instructorId}:
+  /api/instructors/{instructorId}:
     get:
       summary: Retrieve a single instructor
       operationId: getInstructor
@@ -203,7 +203,7 @@ paths:
   ##########################################################################
   # COURSES
   ##########################################################################
-  /courses:
+  /api/courses:
     get:
       summary: List all courses
       operationId: listCourses
@@ -238,7 +238,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Course'
-  /courses/{courseId}:
+  /api/courses/{courseId}:
     get:
       summary: Retrieve a single course
       operationId: getCourse
@@ -293,7 +293,7 @@ paths:
   ##########################################################################
   # ENROLLMENTS
   ##########################################################################
-  /enrollments:
+  /api/enrollments:
     get:
       summary: List all enrollments
       operationId: listEnrollments
@@ -328,7 +328,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Enrollment'
-  /enrollments/{enrollmentId}:
+  /api/enrollments/{enrollmentId}:
     get:
       summary: Retrieve a single enrollment
       operationId: getEnrollment
@@ -383,7 +383,7 @@ paths:
   ##########################################################################
   # MODULES
   ##########################################################################
-  /modules:
+  /api/modules:
     get:
       summary: List all modules
       operationId: listModules
@@ -418,7 +418,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Module'
-  /modules/{moduleId}:
+  /api/modules/{moduleId}:
     get:
       summary: Retrieve a single module
       operationId: getModule
@@ -473,7 +473,7 @@ paths:
   ##########################################################################
   # LESSONS
   ##########################################################################
-  /lessons:
+  /api/lessons:
     get:
       summary: List all Lessons
       operationId: listLesson
@@ -520,7 +520,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Lesson'
-  /lessons/{lessonId}/blocks:
+  /api/lessons/{lessonId}/blocks:
     get:
       summary: Retrieve a single Lesson
       operationId: getLessonBlocks
@@ -539,7 +539,7 @@ paths:
                   $ref: '#/components/schemas/LessonBlock'
         '404':
           description: Lesson not found
-  /lessons/{lessonId}:
+  /api/lessons/{lessonId}:
     get:
       summary: Retrieve a single Lesson
       operationId: getLesson
@@ -594,7 +594,7 @@ paths:
   ##########################################################################
   # ASSIGNMENTS
   ##########################################################################
-  /assignments:
+  /api/assignments:
     get:
       summary: List all assignments
       operationId: listAssignments
@@ -629,7 +629,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Assignment'
-  /assignments/{assignmentId}:
+  /api/assignments/{assignmentId}:
     get:
       summary: Retrieve a single assignment
       operationId: getAssignment
@@ -684,7 +684,7 @@ paths:
   ##########################################################################
   # SUBMISSIONS
   ##########################################################################
-  /submissions:
+  /api/submissions:
     get:
       summary: List all submissions
       operationId: listSubmissions
@@ -719,7 +719,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Submission'
-  /submissions/{submissionId}:
+  /api/submissions/{submissionId}:
     get:
       summary: Retrieve a single submission
       operationId: getSubmission
@@ -770,7 +770,7 @@ paths:
           description: Submission deleted successfully
         '404':
           description: Submission not found
-  /activities:
+  /api/activities:
     get:
       summary: List all submission activities
       operationId: getSubmissionActivities
@@ -794,7 +794,7 @@ paths:
   ##########################################################################
   # SUBMISSIONS
   ##########################################################################
-  /comments:
+  /api/comments:
     get:
       summary: List all comments
       operationId: listComments
@@ -829,7 +829,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
-  /comments/{commentId}:
+  /api/comments/{commentId}:
     get:
       summary: Retrieve a single Comment
       operationId: getComment
