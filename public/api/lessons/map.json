@@ -1,5 +1,8 @@
 {
   "01-first-lesson": {
     "title": "Secure Software Development Lifecycle (SSDLC)"
+  },
+  "02-cloud-and-sdlc": {
+    "title": "Cloud Computing & Secure Software Development Lifecycle"
   }
 }
