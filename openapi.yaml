@@ -1181,28 +1181,27 @@ components:
         - member
       default: main
     CoreSubmissionMember:
-      type: object
-      required:
-        - assignment_id
-        - enrollment_id
-        - submission_id
-        - role
-      properties:
-        assignment_id:
-          $ref: '#/components/schemas/Cuid'
-        enrollment_id:
-          $ref: '#/components/schemas/Cuid'
-        submission_id:
-          $ref: '#/components/schemas/Cuid'
-        role:
-          $ref: '#/components/schemas/SubmissionMemberRole'
+      allOf:
+        - $ref: '#/components/schemas/WithMeta'
+        - type: object
+          required:
+            - assignment_id
+            - enrollment_id
+            - submission_id
+            - role
+          properties:
+            assignment_id:
+              $ref: '#/components/schemas/Cuid'
+            enrollment_id:
+              $ref: '#/components/schemas/Cuid'
+            submission_id:
+              $ref: '#/components/schemas/Cuid'
+            role:
+              $ref: '#/components/schemas/SubmissionMemberRole'
     SubmissionMember:
       allOf:
         - $ref: '#/components/schemas/CoreSubmissionMember'
         - type: object
-          required:
-            - created_at
-            - updated_at
           properties:
             created_at:
               $ref: '#/components/schemas/DateTime'
