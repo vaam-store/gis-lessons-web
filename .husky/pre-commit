@@ -1,4 +1,4 @@
 set -e
 
 yarn lint:fix
-yarn test
+yarn test --run

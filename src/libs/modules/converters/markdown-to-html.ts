@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeStarryNight from 'rehype-starry-night';
 import rehypeStringify from 'rehype-stringify';

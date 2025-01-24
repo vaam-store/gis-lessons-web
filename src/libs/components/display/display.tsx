@@ -34,10 +34,13 @@ export default function Display({ data }: DisplayProps) {
     });
     //console.log(deckRef.current);
 
-    deckRef.current.initialize().then(() => {
-      console.log('Deck initialized');
-      // good place for event handlers and plugin setups
-    });
+    deckRef.current
+      .initialize()
+      .then(() => {
+        console.log('Deck initialized');
+        // good place for event handlers and plugin setups
+      })
+      .catch(console.log);
 
     return () => {
       try {
