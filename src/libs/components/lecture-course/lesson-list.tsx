@@ -1,10 +1,10 @@
 import { useListLesson } from '@openapi/queries';
 import { Lesson } from '@openapi/requests';
 import ErrorPage from '@scr/error';
+import { useId } from 'react';
 import { Loading } from 'react-daisyui';
 import { NavLink } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
-import { useId } from 'react';
 
 export interface LessonListProps {
   moduleId: string;
@@ -60,7 +60,7 @@ export function LessonListItem({
       to={`/lectures/${courseId}/modules/${moduleId}/lessons/${lesson.id}`}>
       {({ isActive }) => (
         <div
-          className={twMerge('text-ellipsis text-nowrap form-control py-2', [
+          className={twMerge('form-control text-ellipsis text-nowrap py-2', [
             isActive ? 'text-primary' : 'text-base-content',
           ])}>
           <label className='label cursor-pointer'>

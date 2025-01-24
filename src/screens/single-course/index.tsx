@@ -18,9 +18,9 @@ export function Component() {
     return <Loading />;
   }
 
-  if (error) {
+  if (error || !data) {
     return <ErrorPage />;
   }
 
-  return <SingleCourseContent data={data!} />;
+  return <SingleCourseContent data={data} />;
 }

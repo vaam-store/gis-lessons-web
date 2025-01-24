@@ -17,7 +17,7 @@ export function Component() {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (error || !data) {
     return <div>Error</div>;
   }
 
@@ -29,7 +29,7 @@ export function Component() {
 
       <h1 className='app-title'>All Schools</h1>
 
-      <SchoolList data={data!} />
+      <SchoolList data={data} />
     </Container>
   );
 }

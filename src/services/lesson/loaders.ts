@@ -1,6 +1,9 @@
+import {
+  prefetchUseGetCourse,
+  prefetchUseGetLesson,
+} from '@openapi/queries/prefetch.ts';
 import { QueryClient } from '@tanstack/react-query';
 import { LoaderFunctionArgs } from 'react-router-dom';
-import { prefetchUseGetCourse, prefetchUseGetLesson } from '@openapi/queries/prefetch.ts';
 
 export function courseLoader(
   qc: QueryClient,

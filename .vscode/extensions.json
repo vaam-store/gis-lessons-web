@@ -12,6 +12,9 @@
     "firsttris.vscode-jest-runner",
     "ms-playwright.playwright",
     "donjayamanne.githistory",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "tim-koehler.helm-intellisense",
+    "ecmel.vscode-html-css",
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
   ]
 }

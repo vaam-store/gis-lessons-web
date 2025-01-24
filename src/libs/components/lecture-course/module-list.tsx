@@ -54,14 +54,15 @@ export function CourseModuleListItem({
       <NavLink to={`/lectures/${courseId}/modules/${module.id}`}>
         {({ isActive }) => (
           <div
-            className={twMerge('text-ellipsis text-nowrap font-bold py-2 md:py-4', [
-              isActive ? 'text-primary' : 'text-base-content',
-            ])}>
+            className={twMerge(
+              'text-ellipsis text-nowrap py-2 font-bold md:py-4',
+              [isActive ? 'text-primary' : 'text-base-content'],
+            )}>
             {module.title}
           </div>
         )}
       </NavLink>
-      
+
       <LessonList key={module.id} moduleId={module.id} courseId={courseId} />
     </>
   );

@@ -11,7 +11,7 @@ interface SingleCourseContentProps {
 }
 
 export function SingleCourseContent({
-  data: { name, description, id, longDescription },
+  data: { name, description, id },
 }: SingleCourseContentProps) {
   return (
     <>
@@ -28,7 +28,7 @@ export function SingleCourseContent({
           <span>{name}</span>
         </h1>
 
-        <p>{longDescription}</p>
+        <p>{description}</p>
 
         <div className='py-4'>
           <NavLink to={`/lectures/${id}`}>

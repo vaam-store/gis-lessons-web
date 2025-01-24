@@ -14,9 +14,7 @@ export function SingleCourseModule({ module }: SingleCourseModuleProps) {
     <div className='card outline outline-1'>
       <div className='card-body'>
         <div className='card-title'>{module.title}</div>
-        <p>
-          {module.description}
-        </p>
+        <p>{module.description}</p>
       </div>
     </div>
   );
