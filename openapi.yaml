@@ -681,6 +681,114 @@ paths:
         '404':
           description: Submission not found
 
+  /api/submissions/{submissionId}/members:
+    get:
+      summary: List all members for a submission
+      operationId: listSubmissionMembers
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - read:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+      responses:
+        '200':
+          description: A list of members
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 1
+                items:
+                  $ref: '#/components/schemas/SubmissionMember'
+    post:
+      summary: Create a new member
+      operationId: createSubmissionMember
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionMemberCreate'
+      responses:
+        '201':
+          description: Submission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionMember'
+  /api/submissions/{submissionId}/members/{enrollmentId}:
+    get:
+      summary: Retrieve a single member
+      operationId: getSubmissionMember
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - read:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+        - $ref: '#/components/parameters/enrollmentId'
+      responses:
+        '200':
+          description: The requested member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionMember'
+        '404':
+          description: Member not found
+    put:
+      summary: Update a submission's member
+      operationId: updateSubmissionMember
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+        - $ref: '#/components/parameters/enrollmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionMemberUpdate'
+      responses:
+        '200':
+          description: Submission updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionMember'
+        '404':
+          description: Submission not found
+    delete:
+      summary: Delete a submission's member
+      operationId: deleteSubmissionMember
+      tags:
+        - Submissions
+      security:
+        - bearerAuth:
+            - write:submissions
+      parameters:
+        - $ref: '#/components/parameters/submissionId'
+        - $ref: '#/components/parameters/enrollmentId'
+      responses:
+        '204':
+          description: Submission's member deleted successfully
+        '404':
+          description: Submission's member not found
+
   ##########################################################################
   # ACTIVITIES
   ##########################################################################
