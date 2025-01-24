@@ -1008,7 +1008,8 @@ components:
         title:
           type: string
         content:
-          type: string
+          type: object
+          additionalProperties: true
         description:
           type: string
       required:
