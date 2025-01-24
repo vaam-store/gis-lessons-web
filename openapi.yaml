@@ -38,216 +38,6 @@ tags:
     description: All about managing course
 paths:
   ##########################################################################
-  # STUDENTS
-  ##########################################################################
-  /api/students:
-    get:
-      summary: List all students
-      operationId: listStudents
-      tags:
-        - Students
-      security:
-        - bearerAuth:
-            - read:students
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/search_query'
-      responses:
-        '200':
-          description: A list of students
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PageStudent'
-    post:
-      summary: Create a new student
-      operationId: createStudent
-      tags:
-        - Students
-      security:
-        - bearerAuth:
-            - write:students
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StudentCreate'
-      responses:
-        '201':
-          description: Student created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Student'
-  /api/students/{studentId}:
-    get:
-      summary: Retrieve a single student
-      operationId: getStudent
-      tags:
-        - Students
-      security:
-        - bearerAuth:
-            - read:students
-      parameters:
-        - $ref: '#/components/parameters/studentId'
-      responses:
-        '200':
-          description: The requested student
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Student'
-        '404':
-          description: Student not found
-    put:
-      summary: Update a student
-      operationId: updateStudent
-      tags:
-        - Students
-      security:
-        - bearerAuth:
-            - write:students
-      parameters:
-        - $ref: '#/components/parameters/studentId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StudentUpdate'
-      responses:
-        '200':
-          description: Student updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Student'
-        '404':
-          description: Student not found
-    delete:
-      summary: Delete a student
-      operationId: deleteStudent
-      tags:
-        - Students
-      security:
-        - bearerAuth:
-            - write:students
-      parameters:
-        - $ref: '#/components/parameters/studentId'
-      responses:
-        '204':
-          description: Student deleted successfully
-        '404':
-          description: Student not found
-
-  ##########################################################################
-  # INSTRUCTORS
-  ##########################################################################
-  /api/instructors:
-    get:
-      summary: List all instructors
-      operationId: listInstructors
-      tags:
-        - Instructors
-      security:
-        - bearerAuth:
-            - read:instructors
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/search_query'
-      responses:
-        '200':
-          description: A list of instructors
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PageInstructor'
-    post:
-      summary: Create a new instructor
-      operationId: createInstructor
-      tags:
-        - Instructors
-      security:
-        - bearerAuth:
-            - write:instructors
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InstructorCreate'
-      responses:
-        '201':
-          description: Instructor created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Instructor'
-  /api/instructors/{instructorId}:
-    get:
-      summary: Retrieve a single instructor
-      operationId: getInstructor
-      tags:
-        - Instructors
-      security:
-        - bearerAuth:
-            - read:instructors
-      parameters:
-        - $ref: '#/components/parameters/instructorId'
-      responses:
-        '200':
-          description: The requested instructor
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Instructor'
-        '404':
-          description: Instructor not found
-    put:
-      summary: Update an instructor
-      operationId: updateInstructor
-      tags:
-        - Instructors
-      security:
-        - bearerAuth:
-            - write:instructors
-      parameters:
-        - $ref: '#/components/parameters/instructorId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InstructorUpdate'
-      responses:
-        '200':
-          description: Instructor updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Instructor'
-        '404':
-          description: Instructor not found
-    delete:
-      summary: Delete an instructor
-      operationId: deleteInstructor
-      tags:
-        - Instructors
-      security:
-        - bearerAuth:
-            - write:instructors
-      parameters:
-        - $ref: '#/components/parameters/instructorId'
-      responses:
-        '204':
-          description: Instructor deleted successfully
-        '404':
-          description: Instructor not found
-
-  ##########################################################################
   # COURSES
   ##########################################################################
   /api/courses:
@@ -368,6 +158,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search_query'
+        - $ref: '#/components/parameters/enrollment_type'
       responses:
         '200':
           description: A list of enrollments
@@ -470,12 +261,6 @@ paths:
         - bearerAuth:
             - read:modules
       parameters:
-        - name: courseId
-          in: query
-          required: true
-          description: The ID of the course to retrieve
-          schema:
-            $ref: '#/components/schemas/Cuid'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search_query'
@@ -624,28 +409,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Lesson'
-  /api/lessons/{lessonId}/blocks:
-    get:
-      summary: Retrieve a single Lesson
-      operationId: getLessonBlocks
-      tags:
-        - Lessons
-      security:
-        - bearerAuth:
-            - read:lessons
-      parameters:
-        - $ref: '#/components/parameters/lessonId'
-      responses:
-        '200':
-          description: The requested Lesson's block
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties:
-                  $ref: '#/components/schemas/LessonBlock'
-        '404':
-          description: Lesson not found
   /api/lessons/{lessonId}:
     get:
       summary: Retrieve a single Lesson
@@ -688,7 +451,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Module'
+                $ref: '#/components/schemas/Lesson'
         '404':
           description: Lesson not found
     delete:
@@ -828,6 +591,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/search_query'
+        - $ref: '#/components/parameters/submission_status'
       responses:
         '200':
           description: A list of submissions
@@ -916,6 +680,10 @@ paths:
           description: Submission deleted successfully
         '404':
           description: Submission not found
+
+  ##########################################################################
+  # ACTIVITIES
+  ##########################################################################
   /api/activities:
     get:
       summary: List all submission activities
@@ -938,7 +706,6 @@ paths:
                 $ref: '#/components/schemas/PageActivity'
         '404':
           description: Activity not found
-
 
   ##########################################################################
   # SUBMISSIONS
@@ -1007,20 +774,6 @@ paths:
 
 components:
   parameters:
-    studentId:
-      name: studentId
-      in: path
-      required: true
-      description: The ID of the student to retrieve
-      schema:
-        $ref: '#/components/schemas/Cuid'
-    instructorId:
-      name: instructorId
-      in: path
-      required: true
-      description: The ID of the instructor to retrieve
-      schema:
-        $ref: '#/components/schemas/Cuid'
     courseId:
       name: courseId
       in: path
@@ -1102,6 +855,20 @@ components:
       required: false
       schema:
         type: string
+    enrollment_type:
+      name: enrollment_type
+      in: query
+      description: The type of enrollment
+      required: true
+      schema:
+        $ref: '#/components/schemas/EnrollmentType'
+    submission_status:
+      name: submission_status
+      in: query
+      description: The status of submission
+      required: true
+      schema:
+        $ref: '#/components/schemas/SubmissionStatus'
   ##########################################################################
   # SCHEMAS (Data Models)
   ##########################################################################
@@ -1128,57 +895,11 @@ components:
     Meta:
       type: object
       additionalProperties: true
-      default: { }
+      default: {}
     WithMeta:
       properties:
         meta:
           $ref: '#/components/schemas/Meta'
-    
-    #-------------------------------------------------------
-    # STUDENT
-    #-------------------------------------------------------
-    CoreStudent:
-      type: object
-      properties:
-        user_id:
-          $ref: '#/components/schemas/Cuid'
-      required:
-        - user_id
-    Student:
-      allOf:
-        - $ref: '#/components/schemas/Model'
-        - $ref: '#/components/schemas/CoreStudent'
-    StudentCreate:
-      allOf:
-        - $ref: '#/components/schemas/CoreStudent'
-        - $ref: '#/components/schemas/WithMeta'
-    StudentUpdate:
-      allOf:
-        - $ref: '#/components/schemas/CoreStudent'
-        - $ref: '#/components/schemas/WithMeta'
-
-    #-------------------------------------------------------
-    # INSTRUCTOR
-    #-------------------------------------------------------
-    CoreInstructor:
-      type: object
-      properties:
-        user_id:
-          $ref: '#/components/schemas/Cuid'
-      required:
-        - user_id
-    Instructor:
-      allOf:
-        - $ref: '#/components/schemas/Model'
-        - $ref: '#/components/schemas/CoreInstructor'
-    InstructorCreate:
-      allOf:
-        - $ref: '#/components/schemas/CoreInstructor'
-        - $ref: '#/components/schemas/WithMeta'
-    InstructorUpdate:
-      allOf:
-        - $ref: '#/components/schemas/CoreInstructor'
-        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # COURSE
@@ -1194,15 +915,10 @@ components:
         description:
           type: string
           example: Basic programming concepts using Python
-        longDescription:
-          type: string
-          example: |
-            This course introduces students to the basic concepts of programming.
-            It covers variables, data types, and basic operations.
-            We will use Python as the programming language.
       required:
         - name
         - slug
+        - description
     Course:
       allOf:
         - $ref: '#/components/schemas/Model'
@@ -1219,19 +935,24 @@ components:
     #-------------------------------------------------------
     # ENROLLMENT
     #-------------------------------------------------------
+    EnrollmentType:
+      type: string
+      enum:
+        - student
+        - teacher
     CoreEnrollment:
       type: object
       properties:
-        student_id:
+        user_id:
           $ref: '#/components/schemas/Cuid'
         course_id:
           $ref: '#/components/schemas/Cuid'
-        enrollment_date:
-          $ref: '#/components/schemas/DateTime'
+        enrollment_type:
+          $ref: '#/components/schemas/EnrollmentType'
       required:
-        - student_id
+        - user_id
         - course_id
-        - enrollment_date
+        - enrollment_type
     Enrollment:
       allOf:
         - $ref: '#/components/schemas/Model'
@@ -1250,6 +971,10 @@ components:
     #-------------------------------------------------------
     CoreModule:
       type: object
+      required:
+        - course_id
+        - title
+        - description
       properties:
         course_id:
           $ref: '#/components/schemas/Cuid'
@@ -1259,11 +984,6 @@ components:
         description:
           type: string
           example: Introduction to fundamental programming concepts
-        longDescription:
-          type: string
-          example: |
-            This module introduces students to the basic concepts of programming.
-            It covers variables, data types, and basic operations.
     Module:
       allOf:
         - $ref: '#/components/schemas/Model'
@@ -1287,39 +1007,14 @@ components:
           $ref: '#/components/schemas/Cuid'
         title:
           type: string
+        content:
+          type: string
         description:
           type: string
       required:
         - module_id
         - title
-    CoreLessonBlock:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-            - slide
-            - content
-        content:
-          type: string
-          example: |
-            This is a slide content
-            ---
-            This is another slide content
-            ---
-            This is a content block
-            ------
-            This is another content block
-            ---
-            This is a slide content
-      required:
-        - type
-        - data
         - content
-    LessonBlock:
-      allOf:
-        - $ref: '#/components/schemas/Model'
-        - $ref: '#/components/schemas/CoreLessonBlock'
     Lesson:
       allOf:
         - $ref: '#/components/schemas/Model'
@@ -1328,24 +1023,10 @@ components:
       allOf:
         - $ref: '#/components/schemas/CoreLesson'
         - $ref: '#/components/schemas/WithMeta'
-        - type: object
-          required:
-            - blocks
-          properties:
-            blocks:
-              additionalProperties:
-                $ref: '#/components/schemas/CoreLessonBlock'
     LessonUpdate:
       allOf:
         - $ref: '#/components/schemas/CoreLesson'
         - $ref: '#/components/schemas/WithMeta'
-        - type: object
-          required:
-            - blocks
-          properties:
-            blocks:
-              additionalProperties:
-                $ref: '#/components/schemas/CoreLessonBlock'
 
     #-------------------------------------------------------
     # ASSIGNMENT
@@ -1353,18 +1034,16 @@ components:
     CoreAssignment:
       type: object
       required:
-        - module_id
-        - instructor_id
+        - lesson_id
         - title
         - due_date
       properties:
-        module_id:
-          $ref: '#/components/schemas/Cuid'
-        instructor_id:
+        lesson_id:
           $ref: '#/components/schemas/Cuid'
         title:
           type: string
-          example: Homework #1
+          example: |
+            Homework #1
         description:
           type: string
           example: Solve basic programming exercises
@@ -1386,15 +1065,60 @@ components:
     #-------------------------------------------------------
     # SUBMISSION
     #-------------------------------------------------------
-    CoreSubmission:
+    SubmissionMemberRole:
+      type: string
+      enum:
+        - main
+        - member
+      default: main
+    CoreSubmissionMember:
       type: object
+      required:
+        - assignment_id
+        - enrollment_id
+        - submission_id
+        - role
       properties:
         assignment_id:
           $ref: '#/components/schemas/Cuid'
-        student_id:
+        enrollment_id:
+          $ref: '#/components/schemas/Cuid'
+        submission_id:
+          $ref: '#/components/schemas/Cuid'
+        role:
+          $ref: '#/components/schemas/SubmissionMemberRole'
+    SubmissionMember:
+      allOf:
+        - $ref: '#/components/schemas/Model'
+        - $ref: '#/components/schemas/CoreSubmissionMember'
+    SubmissionMemberCreate:
+      allOf:
+        - $ref: '#/components/schemas/CoreSubmissionMember'
+        - $ref: '#/components/schemas/WithMeta'
+    SubmissionMemberUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreSubmissionMember'
+        - $ref: '#/components/schemas/WithMeta'
+
+    SubmissionStatus:
+      type: string
+      enum:
+        - draft
+        - submitted
+      default: draft
+    CoreSubmission:
+      type: object
+      required:
+        - assignment_id
+        - status
+        - content
+      properties:
+        assignment_id:
           $ref: '#/components/schemas/Cuid'
         date_submitted:
           $ref: '#/components/schemas/DateTime'
+        status:
+          $ref: '#/components/schemas/SubmissionStatus'
         content:
           type: string
           example: "print('Hello World')"
@@ -1423,9 +1147,6 @@ components:
     ActivityEntityType:
       type: string
       enum:
-        - student
-        - instructor
-        - course
         - enrollment
         - module
         - assignment
@@ -1483,6 +1204,10 @@ components:
       allOf:
         - $ref: '#/components/schemas/CoreComment'
         - $ref: '#/components/schemas/WithMeta'
+    CommentUpdate:
+      allOf:
+        - $ref: '#/components/schemas/CoreComment'
+        - $ref: '#/components/schemas/WithMeta'
 
     #-------------------------------------------------------
     # PAGINATION
@@ -1508,30 +1233,6 @@ components:
             total:
               type: integer
               format: int64
-    PageStudent:
-      allOf:
-        - $ref: '#/components/schemas/CorePage'
-        - type: object
-          required:
-            - items
-          properties:
-            items:
-              type: array
-              minItems: 10
-              items:
-                $ref: '#/components/schemas/Student'
-    PageInstructor:
-      allOf:
-        - $ref: '#/components/schemas/CorePage'
-        - type: object
-          required:
-            - items
-          properties:
-            items:
-              type: array
-              minItems: 10
-              items:
-                $ref: '#/components/schemas/Instructor'
     PageCourse:
       allOf:
         - $ref: '#/components/schemas/CorePage'
@@ -1541,7 +1242,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Course'
     PageEnrollment:
@@ -1553,7 +1253,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Enrollment'
     PageModule:
@@ -1565,7 +1264,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Module'
     PageAssignment:
@@ -1577,7 +1275,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Assignment'
     PageSubmission:
@@ -1589,7 +1286,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Submission'
     PageActivity:
@@ -1601,7 +1297,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Activity'
     PageComment:
@@ -1613,7 +1308,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Comment'
     PageLesson:
@@ -1625,7 +1319,6 @@ components:
           properties:
             items:
               type: array
-              minItems: 10
               items:
                 $ref: '#/components/schemas/Lesson'
 
@@ -1653,10 +1346,5 @@ components:
             write:modules: Some permission
             read:enrollments: Some permission
             write:enrollments: Some permission
-            read:students: Some permission
-            write:students: Some permission
-            read:instructors: Some permission
-            write:instructors: Some permission
             read:users: Some permission
-            write:users: Some permission 
-    
+            write:users: Some permission
