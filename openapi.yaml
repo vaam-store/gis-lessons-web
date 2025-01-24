@@ -1198,8 +1198,16 @@ components:
           $ref: '#/components/schemas/SubmissionMemberRole'
     SubmissionMember:
       allOf:
-        - $ref: '#/components/schemas/Model'
         - $ref: '#/components/schemas/CoreSubmissionMember'
+        - type: object
+          required:
+            - created_at
+            - updated_at
+          properties:
+            created_at:
+              $ref: '#/components/schemas/DateTime'
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
     SubmissionMemberCreate:
       allOf:
         - $ref: '#/components/schemas/CoreSubmissionMember'
