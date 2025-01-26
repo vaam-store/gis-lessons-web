@@ -1296,6 +1296,13 @@ components:
     #-------------------------------------------------------
     # COMMENT
     #-------------------------------------------------------
+    CommentType:
+      type: string
+      enum:
+        - submission
+        - assignment
+        - module
+        - course
     CoreComment:
       type: object
       properties:
@@ -1306,12 +1313,7 @@ components:
         content:
           type: string
         type:
-          type: string
-          enum:
-            - submission
-            - assignment
-            - module
-            - course
+          $ref: '#/components/schemas/CommentType'
     Comment:
       allOf:
         - $ref: '#/components/schemas/Model'
