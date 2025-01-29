@@ -1,0 +1,84 @@
+app-template:
+  global:
+    fullnameOverride: gis-lms-web
+    namespace: my-namespace
+    labels:
+      app: gis-lms-web
+
+  defaultPodOptions:
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+
+  controllers:
+    myController:
+      type: deployment
+      replicas: 1
+      containers:
+        app:
+          nameOverride: gis-lms-web-app
+          image:
+            repository: ghcr.io/stephane-segning/gis-lessons-web
+            tag: latest
+            pullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: gis-lms-web-config
+
+  service:
+    app:
+      enabled: true
+      nameOverride: service
+      annotations: {}
+      type: ClusterIP
+      controller: myController
+      ports:
+        http:
+          enabled: true
+          port: 80
+          targetPort: 80
+
+  ingress:
+    appIngress:
+      enabled: true
+      nameOverride: ingress
+      annotations: {}
+      className: nginx
+      hosts:
+        - host: gis-lms-web.example.com
+          paths:
+            - path: /
+              service:
+                identifier: app
+                port: http
+      tls:
+        - secretName: my-tls-secret
+          hosts:
+            - gis-lms-web.example.com
+
+  configMaps:
+    config:
+      enabled: true
+      labels:
+        app: gis-lms-web-config
+      annotations:
+        description: "Configuration for the GIS LMS Web application."
+      data:
+        foo: bar
+
+  networkpolicies:
+    myNetworkPolicy:
+      enabled: true
+      nameOverride: network-policy
+      controller: myController
+      policyTypes:
+        - Ingress
+      rules:
+        ingress:
+          - from:
+              - podSelector:
+                  matchLabels:
+                    app: gis-lms-web
+            ports:
+              - protocol: TCP
+                port: 80
