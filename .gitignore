@@ -27,6 +27,7 @@ bundlemeta.json
 *.njsproj
 *.sln
 *.sw?
+*.tgz
 
 coverage
 *storybook.log
