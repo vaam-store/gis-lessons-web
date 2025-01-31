@@ -698,10 +698,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                minItems: 1
-                items:
-                  $ref: '#/components/schemas/SubmissionMember'
+                $ref: '#/components/schemas/PageSubmissionMember'
     post:
       summary: Create a new member
       operationId: createSubmissionMember
@@ -1439,6 +1436,17 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Lesson'
+    PageSubmissionMember:
+      allOf:
+        - $ref: '#/components/schemas/CorePage'
+        - type: object
+          required:
+            - items
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/SubmissionMember'
 
   securitySchemes:
     bearerAuth:

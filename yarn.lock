@@ -1427,6 +1427,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codexteam/icons@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@codexteam/icons@npm:0.0.5"
+  checksum: 10c0/5f73f137a65a17959d758a80a3b3846801475a9555791a13561b4a2fcb57664bb7a667b6c27ea1da6f9d462b5b0657b2c35164928ad6c0a10b7e4737ddd79104
+  languageName: node
+  linkType: hard
+
+"@codexteam/icons@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "@codexteam/icons@npm:0.0.6"
+  checksum: 10c0/b29d2f4b931f763999354781199ab60ada31bc1b8c419df916d4e5857a68c73e5b8615a1c5b72434367e23f95c75e62c1053090f6b34d52d66add9d686a950cb
+  languageName: node
+  linkType: hard
+
+"@codexteam/icons@npm:^0.3.0, @codexteam/icons@npm:^0.3.2":
+  version: 0.3.3
+  resolution: "@codexteam/icons@npm:0.3.3"
+  checksum: 10c0/336245f38a2b2a53626a552a5f0f32c822ee1265be6827670ba157c9fa101cb23e6c75e625aa067e4577c2d805e261f4ffcb61097ea94c034c0a3c0cae7d7271
+  languageName: node
+  linkType: hard
+
 "@commitlint/cli@npm:^19.5.0":
   version: 19.6.1
   resolution: "@commitlint/cli@npm:19.6.1"
@@ -1642,6 +1663,105 @@ __metadata:
   peerDependencies:
     postcss-selector-parser: ^7.0.0
   checksum: 10c0/186b444cabcdcdeb553bfe021f80c58bfe9ef38dcc444f2b1f34a5aab9be063ab4e753022b2d5792049c041c28cfbb78e4b707ec398459300e402030d35c07eb
+  languageName: node
+  linkType: hard
+
+"@editorjs/checklist@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@editorjs/checklist@npm:1.6.0"
+  dependencies:
+    "@codexteam/icons": "npm:^0.3.0"
+  checksum: 10c0/85de46cf3ad1cacf4d67ca75d4d3129dd5719ec297ac44fa852272bb5d5513b46a9d8ecafa6b3a8b77989519a8dd5eb2bdc48ebae8846fea5dede448df8a7844
+  languageName: node
+  linkType: hard
+
+"@editorjs/delimiter@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@editorjs/delimiter@npm:1.4.2"
+  dependencies:
+    "@codexteam/icons": "npm:^0.3.2"
+  checksum: 10c0/635e96097529484e3db69b565de6dd153c5b4564906f1e4ad5883c3f97236badbc2b964a512a7456f0f3819eac0809e061f4a5a0e27b49054b28b2e8e13b1d7c
+  languageName: node
+  linkType: hard
+
+"@editorjs/editorjs@npm:^2.29.1, @editorjs/editorjs@npm:^2.30.7":
+  version: 2.30.7
+  resolution: "@editorjs/editorjs@npm:2.30.7"
+  checksum: 10c0/22cfd862226a709efbf438b1f4195234a30a0580cd1262dd1155454fdc1b7a968e4909afde52ce9d928e35aba7b858da672b2fe8ebc6400eed207402b34d966c
+  languageName: node
+  linkType: hard
+
+"@editorjs/header@npm:^2.8.8":
+  version: 2.8.8
+  resolution: "@editorjs/header@npm:2.8.8"
+  dependencies:
+    "@codexteam/icons": "npm:^0.0.5"
+    "@editorjs/editorjs": "npm:^2.29.1"
+  checksum: 10c0/c208d2ea852c0e75b09a03ce08db558249c0e1efd17459f4adc80de9c30963b69129f744764769047e1766403e2e0fa249a5086eefdbcd5f3a082fbcd3ee4ec6
+  languageName: node
+  linkType: hard
+
+"@editorjs/image@npm:^2.10.1":
+  version: 2.10.1
+  resolution: "@editorjs/image@npm:2.10.1"
+  dependencies:
+    "@codexteam/icons": "npm:^0.3.0"
+  checksum: 10c0/ef13c3719665e0ef018bfb35fecf55fcee4c580ae1d226b4e9c61f5194a16509d2dcc7c74b5afa08325f836ec89624e31d5db37335ba84b6a3095b2f03f5c99b
+  languageName: node
+  linkType: hard
+
+"@editorjs/inline-code@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "@editorjs/inline-code@npm:1.5.1"
+  dependencies:
+    "@codexteam/icons": "npm:^0.3.2"
+  checksum: 10c0/3d58da54fd10e40ca7309ddcccc23c512ef1a8148c583d2ee3f903d2b812fca38d73bb80855bf262fa96a19908f45c89940eb3e0de94772e885236edf81cf36f
+  languageName: node
+  linkType: hard
+
+"@editorjs/list@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@editorjs/list@npm:2.0.4"
+  dependencies:
+    "@codexteam/icons": "npm:^0.3.2"
+  checksum: 10c0/43a1e2425fb476a0bf650a4f9e588b1b3f52c7e4934053b0c5d50029133f7f462331411768ab25b2f71f777cc7c09045585fbdbd8897e41cab04cd6989fc2399
+  languageName: node
+  linkType: hard
+
+"@editorjs/marker@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@editorjs/marker@npm:1.4.0"
+  dependencies:
+    "@codexteam/icons": "npm:^0.0.5"
+  checksum: 10c0/a20a31b4f11dc877fae7c8f0a7f02ef7e96b91247121ad47d0e2d539417012301941ec170c21d5af3bfd568a64be7cb6500d8a0c2d670d93cf7c6cabcad060fd
+  languageName: node
+  linkType: hard
+
+"@editorjs/simple-image@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@editorjs/simple-image@npm:1.6.0"
+  dependencies:
+    "@codexteam/icons": "npm:^0.0.6"
+  checksum: 10c0/b178e05e785e60dab8fc6985e940e3a952b8f2b4266402f043ecbaa1046590bb61f47192d486682cb1a755883ed2664c62cd8587572a2223c3487d3a5ca701be
+  languageName: node
+  linkType: hard
+
+"@editorjs/table@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "@editorjs/table@npm:2.4.3"
+  dependencies:
+    "@codexteam/icons": "npm:^0.0.6"
+  checksum: 10c0/a71cf048b7cb72077eefb4f5a6b742fbb9a0871a7881560a284a327d6837acca4ab3af2e476434b42dc14c81dd56bcadacf0a4058dfc9c70337a5fe73db50be3
+  languageName: node
+  linkType: hard
+
+"@editorjs/warning@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@editorjs/warning@npm:1.4.1"
+  dependencies:
+    "@codexteam/icons": "npm:^0.3.2"
+    "@editorjs/editorjs": "npm:^2.30.7"
+  checksum: 10c0/cf5c83e04235861269f828d5f3639caa9dbf9d923822631335dbb55a4e65e28775e94746af9df02ecf3dd4e36dc01c3776435f263059b1a990427fc38809c185
   languageName: node
   linkType: hard
 
@@ -3437,6 +3557,42 @@ __metadata:
   version: 1.1.0
   resolution: "@protobufjs/utf8@npm:1.1.0"
   checksum: 10c0/a3fe31fe3fa29aa3349e2e04ee13dc170cc6af7c23d92ad49e3eeaf79b9766264544d3da824dba93b7855bd6a2982fb40032ef40693da98a136d835752beb487
+  languageName: node
+  linkType: hard
+
+"@react-editor-js/client@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@react-editor-js/client@npm:2.1.0"
+  dependencies:
+    "@react-editor-js/core": "npm:2.1.0"
+  peerDependencies:
+    "@editorjs/editorjs": "*"
+    "@editorjs/paragraph": "*"
+    react: "*"
+  checksum: 10c0/3d7998164bcd6642305fa009221ee7fe53a5bc52138b0fde3cae9379dae29d9677ebb9f67bb158b97154347e891541179fa39b946b6b8a23304247ecc3b9018a
+  languageName: node
+  linkType: hard
+
+"@react-editor-js/core@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@react-editor-js/core@npm:2.1.0"
+  peerDependencies:
+    "@editorjs/editorjs": "*"
+    react: "*"
+  checksum: 10c0/42f5c5fbe26dc33dbbfc1b27a56bc31a255c3964ccf269edb687cb84473a8a0b0a69ceb6374fce16582a85fe155977f540a4cc8af57c4e837a19fd469138187f
+  languageName: node
+  linkType: hard
+
+"@react-editor-js/server@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@react-editor-js/server@npm:2.1.0"
+  dependencies:
+    "@react-editor-js/core": "npm:2.1.0"
+  peerDependencies:
+    "@editorjs/editorjs": "*"
+    "@editorjs/paragraph": "*"
+    react: "*"
+  checksum: 10c0/e06513bfd27df29cfa2bfbad9db5323efe6817eb63b4002224731db75d3ecd76387aa6cd361b045508a0c293e10efe510bc923126df30aed0c882964fac17c4a
   languageName: node
   linkType: hard
 
@@ -13869,6 +14025,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-editor-js@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "react-editor-js@npm:2.1.0"
+  dependencies:
+    "@react-editor-js/client": "npm:2.1.0"
+    "@react-editor-js/core": "npm:2.1.0"
+    "@react-editor-js/server": "npm:2.1.0"
+  checksum: 10c0/39d36e512a9e6932c29f063714c562ac05d5fde0aa7264bc0fb526602eb3e72a6bafd130eb92da81b44427dc162c5d772a6ff32172831f11fc792abc634a2e0a
+  languageName: node
+  linkType: hard
+
 "react-fast-compare@npm:^3.1.1":
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
@@ -15049,6 +15216,17 @@ __metadata:
     "@chromatic-com/storybook": "npm:^3.2.3"
     "@commitlint/cli": "npm:^19.5.0"
     "@commitlint/config-conventional": "npm:^19.5.0"
+    "@editorjs/checklist": "npm:^1.6.0"
+    "@editorjs/delimiter": "npm:^1.4.2"
+    "@editorjs/editorjs": "npm:^2.30.7"
+    "@editorjs/header": "npm:^2.8.8"
+    "@editorjs/image": "npm:^2.10.1"
+    "@editorjs/inline-code": "npm:^1.5.1"
+    "@editorjs/list": "npm:^2.0.4"
+    "@editorjs/marker": "npm:^1.4.0"
+    "@editorjs/simple-image": "npm:^1.6.0"
+    "@editorjs/table": "npm:^2.4.3"
+    "@editorjs/warning": "npm:^1.4.1"
     "@eslint/js": "npm:^9.17.0"
     "@opentelemetry/api": "npm:^1.9.0"
     "@opentelemetry/auto-instrumentations-web": "npm:^0.45.0"
@@ -15120,6 +15298,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-daisyui: "npm:^5.0.5"
     react-dom: "npm:^18.3.1"
+    react-editor-js: "npm:^2.1.0"
     react-feather: "npm:^2.0.10"
     react-helmet: "npm:^6.1.0"
     react-hot-toast: "npm:^2.4.1"
