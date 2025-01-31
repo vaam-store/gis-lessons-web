@@ -692,6 +692,8 @@ paths:
             - read:submissions
       parameters:
         - $ref: '#/components/parameters/submissionId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: A list of members
