@@ -694,6 +694,7 @@ paths:
         - $ref: '#/components/parameters/submissionId'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search_query'
       responses:
         '200':
           description: A list of members
