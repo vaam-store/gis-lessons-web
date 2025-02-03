@@ -1,1 +1,4 @@
-export * from './single-lesson-content';
+export {
+  SingleLessonContent,
+  type SingleLessonContentProps,
+} from './single-lesson-content';

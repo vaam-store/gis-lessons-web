@@ -22,7 +22,7 @@ export function MarkdownToHtmlWrapper({
     return <div>Error</div>;
   }
 
-  return children(data as any);
+  return children(data as unknown as string);
 }
 
 export interface MarkdownMatterWrapperProps {

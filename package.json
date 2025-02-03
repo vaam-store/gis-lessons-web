@@ -9,6 +9,7 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "build": "tsc -b && vite build",
     "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "preview": "vite preview",
     "codegen": "openapi-rq -i ./openapi.yaml -o src/openapi",
     "generate-pwa-assets": "pwa-assets-generator",
