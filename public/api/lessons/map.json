@@ -10,5 +10,8 @@
   },
   "04-understanding-the-cloud": {
     "title": "What the cloud realy is."
+  },
+  "05-roles-and-responsibilities": {
+    "title": "Roles and Responsibilities in the Software Development Life Cycle (SDLC)."
   }
 }
