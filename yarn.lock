@@ -3347,21 +3347,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@plugin-web-update-notification/core@npm:1.7.1":
-  version: 1.7.1
-  resolution: "@plugin-web-update-notification/core@npm:1.7.1"
-  checksum: 10c0/2ca2f53d4f20c02f74d6e9489361840ff2c922156c6c6da1afd4fd3cbc21c34409fbc3278068cb47470d56e6ef8361f1dc601ff286db96d3836d68ed841b3e2e
+"@plugin-web-update-notification/core@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@plugin-web-update-notification/core@npm:2.0.0"
+  checksum: 10c0/4d6651ee3d7669d0a5f5ed07ae74fdc21ff8d1362409bb54a0342625dbf2333b4a1146cdd6ac8f65b7b32bd37965167a381601b4f46214d0b235ec10db680d43
   languageName: node
   linkType: hard
 
-"@plugin-web-update-notification/vite@npm:^1.7.1":
-  version: 1.7.1
-  resolution: "@plugin-web-update-notification/vite@npm:1.7.1"
+"@plugin-web-update-notification/vite@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@plugin-web-update-notification/vite@npm:2.0.0"
   dependencies:
-    "@plugin-web-update-notification/core": "npm:1.7.1"
+    "@plugin-web-update-notification/core": "npm:2.0.0"
   peerDependencies:
-    vite: ^5.0.0 || >4.0.0 || ^3.0.0
-  checksum: 10c0/03b9118091d5f2d7e9c6b367b68a9cecfacbbe65e3ab5432e33db41d8d5424f99fd578b0fb01598387fddfcbf84b792af70d8fc850c822759b394f2ac418154e
+    vite: ^6.0.0 || ^5.0.0 || >4.0.0 || ^3.0.0
+  checksum: 10c0/08fec07e395f6ced0ee26107e4ca0e5df7c0aa2dad31736fd7f07f611bdc56d83894c06918686a8d7e6380b279262831217065ac5b7280d8fab62221a33c488b
   languageName: node
   linkType: hard
 
@@ -14999,7 +14999,7 @@ __metadata:
     "@opentelemetry/resources": "npm:^1.30.0"
     "@opentelemetry/sdk-trace-web": "npm:^1.30.0"
     "@opentelemetry/semantic-conventions": "npm:^1.28.0"
-    "@plugin-web-update-notification/vite": "npm:^1.7.1"
+    "@plugin-web-update-notification/vite": "npm:^2.0.0"
     "@storybook/addon-essentials": "npm:^8.4.2"
     "@storybook/addon-interactions": "npm:^8.4.2"
     "@storybook/addon-onboarding": "npm:^8.4.2"
