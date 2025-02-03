@@ -11,7 +11,10 @@
   "04-understanding-the-cloud": {
     "title": "What the cloud realy is."
   },
-  "05-roles-and-responsibilities": {
+  "05-roles-and-responsibilities-sdlc": {
     "title": "Roles and Responsibilities in the Software Development Life Cycle (SDLC)."
+  },
+  "06-solid-principles-rust-programming": {
+    "title": "SOLID Principles in Object-Oriented and Rust-Based Programming"
   }
 }
