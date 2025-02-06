@@ -4530,14 +4530,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ts-morph/common@npm:~0.25.0":
-  version: 0.25.0
-  resolution: "@ts-morph/common@npm:0.25.0"
+"@ts-morph/common@npm:~0.26.0":
+  version: 0.26.1
+  resolution: "@ts-morph/common@npm:0.26.1"
   dependencies:
+    fast-glob: "npm:^3.3.2"
     minimatch: "npm:^9.0.4"
     path-browserify: "npm:^1.0.1"
-    tinyglobby: "npm:^0.2.9"
-  checksum: 10c0/c67e66db678e44886e9823e6482834acebfae0ea52ccbfa2af1ca9abfe5a9774dad6e852c8f480909bc196175f17e15454af71d7a41a1c137db09e74f046a830
+  checksum: 10c0/49d33162de3f09fb2a242e38c04a7fa30966977a5282d97d0e27c1d68541956e917ac4de9aac6b41182dbae188482665da6e919c3f6ef0dcb90cea24e4d637e0
   languageName: node
   linkType: hard
 
@@ -15128,7 +15128,7 @@ __metadata:
     tailwind-merge: "npm:^2.6.0"
     tailwindcss: "npm:^3.4.17"
     theme-change: "npm:^2.5.0"
-    ts-morph: "npm:^24.0.0"
+    ts-morph: "npm:^25.0.1"
     ts-node: "npm:^10.9.2"
     typescript: "npm:~5.6.2"
     typescript-eslint: "npm:^8.22.0"
@@ -16003,7 +16003,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.10, tinyglobby@npm:^0.2.9":
+"tinyglobby@npm:^0.2.10":
   version: 0.2.10
   resolution: "tinyglobby@npm:0.2.10"
   dependencies:
@@ -16162,13 +16162,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-morph@npm:^24.0.0":
-  version: 24.0.0
-  resolution: "ts-morph@npm:24.0.0"
+"ts-morph@npm:^25.0.1":
+  version: 25.0.1
+  resolution: "ts-morph@npm:25.0.1"
   dependencies:
-    "@ts-morph/common": "npm:~0.25.0"
+    "@ts-morph/common": "npm:~0.26.0"
     code-block-writer: "npm:^13.0.3"
-  checksum: 10c0/2a0813ba428a154966d4038901f6c32457a60870936b23778f2629433257f87d1881fc4ecae7b791a223a88c2edf96aaac9fb0f88bf34d3c652af8c09c4f43bc
+  checksum: 10c0/4e8b67d7fc521d5dcc7e4e6dfb2e10bc63fcaaef8c31b91d3c9eb98eacd42db70bde3359075dcb8e988a5510f02e2ee6f98a02f89045d648bfda72a5207d78ba
   languageName: node
   linkType: hard
 
