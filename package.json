@@ -71,7 +71,7 @@
     "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.17.0",
     "@plugin-web-update-notification/vite": "^2.0.0",
-    "@storybook/addon-essentials": "^8.4.2",
+    "@storybook/addon-essentials": "^8.6.2",
     "@storybook/addon-interactions": "^8.4.2",
     "@storybook/addon-onboarding": "^8.4.2",
     "@storybook/addon-themes": "^8.5.2",
