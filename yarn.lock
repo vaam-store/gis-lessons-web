@@ -3915,14 +3915,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-themes@npm:^8.5.2":
-  version: 8.5.2
-  resolution: "@storybook/addon-themes@npm:8.5.2"
+"@storybook/addon-themes@npm:^9.0.4":
+  version: 9.0.4
+  resolution: "@storybook/addon-themes@npm:9.0.4"
   dependencies:
     ts-dedent: "npm:^2.0.0"
   peerDependencies:
-    storybook: ^8.5.2
-  checksum: 10c0/b69ec95e9bc46c259d586a3444abdb50d7c7a8057e5cf9812226ada0b90f1301806e465fd71378d1b6d7867f6bfc9e0fec198d5459a2556df354fb80ead3ac5b
+    storybook: ^9.0.4
+  checksum: 10c0/22be1b8802f50325f85d864100c348f1a1a9e10e404f333cdffbb0f3cefb3f1c06672f9b4119528b61f31761936983b4d1cc45a938f5b671f75bf348e64a9868
   languageName: node
   linkType: hard
 
@@ -15288,7 +15288,7 @@ __metadata:
     "@storybook/addon-essentials": "npm:^8.6.4"
     "@storybook/addon-interactions": "npm:^8.4.2"
     "@storybook/addon-onboarding": "npm:^8.4.2"
-    "@storybook/addon-themes": "npm:^8.5.2"
+    "@storybook/addon-themes": "npm:^9.0.4"
     "@storybook/blocks": "npm:^8.4.2"
     "@storybook/nextjs": "npm:^8.6.4"
     "@storybook/react": "npm:^8.6.4"
